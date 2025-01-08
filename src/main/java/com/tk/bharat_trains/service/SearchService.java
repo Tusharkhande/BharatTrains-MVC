@@ -21,6 +21,8 @@ public class SearchService {
 	@Autowired
 	SearchRepository repository;
 	
+	@Autowired
+	TrainService trainService;
 	
 	public List<SearchResponse> search(SearchRequest searchRequest){
 		List<Route> routes = repository.findTrains(searchRequest.getSource(), searchRequest.getDestination());
@@ -40,7 +42,7 @@ public class SearchService {
 //					.bodyToMono(String.class)
 //					.block();
 
-            SearchResponse searchResponse = new SearchResponse(route.getTrainId(), "", searchRequest.getSource(), searchRequest.getDestination(), path, route.getArrivalTime(), route.getDepartureTime(), searchRequest.getJourneyDate());
+            SearchResponse searchResponse = new SearchResponse(route.getTrainId(), trainService.getTrainName(route.getTrainId()), searchRequest.getSource(), searchRequest.getDestination(), path, route.getArrivalTime(), route.getDepartureTime(), searchRequest.getJourneyDate());
             searchResponses.add(searchResponse);
 		}
 		
