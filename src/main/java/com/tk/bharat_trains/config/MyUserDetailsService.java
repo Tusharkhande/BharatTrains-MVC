@@ -5,8 +5,6 @@ import org.springframework.stereotype.Service;
 
 import com.tk.bharat_trains.repository.UserRepository;
 
-import java.util.Optional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;

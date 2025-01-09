@@ -43,7 +43,9 @@ public class BookingService {
 //        			.block();
 
 		ResponseEntity<SeatResponse> seatResponse = seatService.isSeatAvailable(bookingRequest);
-		System.out.println(seatResponse.getBody().isAvailable());
+		
+		log.info("Seatresponse seatstatus... "+seatResponse.getBody().isAvailable());
+		
 		Booking booking = new Booking();
 		if (seatResponse != null && seatResponse.getBody().isAvailable()) {
 			booking.setSource(bookingRequest.getSource());

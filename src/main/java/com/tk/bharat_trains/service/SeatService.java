@@ -36,9 +36,6 @@ public class SeatService {
 		
 		List<StationToSeatMapping> route = seatRepository.findAllByTrainTrainId(bookingRequest.getTrainId());
 		
-		for(StationToSeatMapping staion : route) {
-			System.out.println(staion);
-		}
 		Train train = trainRepository.findByTrainId(bookingRequest.getTrainId());
 		
 		if(train==null || route.isEmpty()) {
@@ -61,24 +58,16 @@ public class SeatService {
 				break;
 			}
 			if(track) {
+				log.info("track " + track);
 				unavailableSeats.addAll(station.getSeats());
-				for (Integer seat : station.getSeats()) {
-				    System.out.println(seat);
-				}
 			}
-		}
-		
-
-		System.out.println("Hashset");
-		for(Integer i: unavailableSeats) {
-			System.out.println(i);
 		}
 		
 		int availableSeat = -1;
 		for(int i=1; i<=totalSeats; i++) {
 			if(!unavailableSeats.contains(i)) {
 				availableSeat = i;
-//				log.info("Seat available: ", i);
+				log.info("Seat available: " + i);
 				seatResponse.setAvailable(true);
 				seatResponse.setSeatId(availableSeat);
 				break;
@@ -87,7 +76,6 @@ public class SeatService {
 		
 		if(availableSeat == -1) {
 			log.warn("Seat not available!");
-			System.out.println("Seat not available");
 			seatResponse.setAvailable(false);
 			return new ResponseEntity<SeatResponse>(seatResponse, HttpStatus.NOT_FOUND);
 		}
@@ -105,6 +93,7 @@ public class SeatService {
 				if(seats.size() < totalSeats) {
 					seats.add(availableSeat);
 					station.setSeats(seats);
+					log.info(station.toString());
 					seatRepository.save(station);
 				}else {
 					seatResponse.setAvailable(false);
@@ -133,7 +122,7 @@ public class SeatService {
 			});
 			return new ResponseEntity<>(savedStations,HttpStatus.CREATED);
 		}catch(Exception e) {
-			System.out.println(e);
+			log.error(e.getMessage());
 			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
@@ -154,7 +143,7 @@ public class SeatService {
 			return new ResponseEntity<Boolean>(cancelStatus, HttpStatus.NOT_FOUND);
 		}
 		int seatToCancel = cancelRequest.getSeatId();
-		System.out.println("seattocancel: " + seatToCancel);
+		log.info("seattocancel: " + seatToCancel);
 		boolean track = false;
 		
 		
@@ -174,7 +163,6 @@ public class SeatService {
 					seats.remove(Integer.valueOf(seatToCancel));
 				}
 
-				System.out.println("seats: " + seats);
 				station.setSeats(seats);
 				seatRepository.save(station);
 				cancelStatus = true;
