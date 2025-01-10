@@ -13,11 +13,10 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 
-import com.tk.bharat_trains.model.Role;
 
-//@EnableWebSecurity
-//@Configuration
-public class SecurityConfig {
+@EnableWebSecurity
+@Configuration
+public class JwtSecurityConfig {
 
 	@Bean
 	public PasswordEncoder encoder() {
@@ -25,7 +24,7 @@ public class SecurityConfig {
 	}
 
 	@Bean
-	public UserDetailsService userDetailsService(DaoAuthenticationProvider auth) {
+	public MyUserDetailsService userDetailsService() {
 		return new MyUserDetailsService();
 	}
 
@@ -40,6 +39,7 @@ public class SecurityConfig {
 				.sessionManagement()
 				.sessionCreationPolicy(SessionCreationPolicy.STATELESS)
 				.and()
+				.authenticationProvider(authenticationProvider(userDetailsService()))
 				.build();
 	}
 
@@ -51,5 +51,8 @@ public class SecurityConfig {
 		return auth;
 	}
 	
-	
+	@Bean
+    public AuthenticationManager authenticationManager(AuthenticationConfiguration auth) throws Exception {
+        return auth.getAuthenticationManager();
+    }
 }

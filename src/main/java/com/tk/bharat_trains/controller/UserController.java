@@ -1,7 +1,11 @@
 package com.tk.bharat_trains.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -11,21 +15,49 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.tk.bharat_trains.config.MyUserDetailsService;
+import com.tk.bharat_trains.dto.LoginRequest;
 import com.tk.bharat_trains.model.Users;
 import com.tk.bharat_trains.service.UserService;
+import com.tk.bharat_trains.utils.JwtUtil;
+
+import lombok.extern.slf4j.Slf4j;
 
 import java.util.*;
 
 @RestController
 @RequestMapping("/api/auth/users")
+@Slf4j
 public class UserController {
 
 	@Autowired
 	UserService service;
+	
+	@Autowired
+	AuthenticationManager authenticationManager;
+	
+	@Autowired
+	MyUserDetailsService userDetailsService;
+	
+	@Autowired
+	JwtUtil jwtUtil;
 
 	@PostMapping("/register")
 	public ResponseEntity<Users> register(@RequestBody Users user) {
 		return service.saveUser(user);
+	}
+	
+	@PostMapping("/login")
+	public ResponseEntity<String> login(@RequestBody LoginRequest loginRequest){
+		try {
+			authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(loginRequest.getUsername(), loginRequest.getPassword()));
+			UserDetails userDetails = userDetailsService.loadUserByUsername(loginRequest.getUsername());
+			String jwt = jwtUtil.generateToken(userDetails.getUsername());
+			return new ResponseEntity<String>(jwt, HttpStatus.OK);
+		}catch(Exception e) {
+			log.error("Exception occurred while createAuthenticationToken " + e);
+            return new ResponseEntity<>("Incorrect username or password", HttpStatus.BAD_REQUEST);
+		}
 	}
 
 	@DeleteMapping("/{userId}")
