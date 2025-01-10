@@ -10,6 +10,8 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 
+import com.tk.bharat_trains.model.Role;
+
 @EnableWebSecurity
 @Configuration
 public class SecurityConfig {
@@ -28,7 +30,12 @@ public class SecurityConfig {
 	public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 		return http.csrf().disable().httpBasic().and()
 				.authorizeHttpRequests()
-				.requestMatchers("/api/**").permitAll()
+				.requestMatchers("/api/train/search**").hasRole("USER")
+				.requestMatchers("/api/train/booking/**").hasRole("USER")
+				.requestMatchers("/api/train/**").hasRole("ADMIN")
+				.requestMatchers("/api/auth/**").permitAll()
+				.anyRequest()
+				.authenticated()
 				.and()
 				.build();
 	}

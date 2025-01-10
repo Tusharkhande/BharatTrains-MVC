@@ -34,8 +34,8 @@ public class BookingController {
 		return bookingService.cancelTicket(bookingId);
 	}
 	
-	@GetMapping("/userId")
-	public ResponseEntity<List<Booking>> getBookingByUserId(int userId){
+	@GetMapping("/user/{userId}")
+	public ResponseEntity<List<Booking>> getBookingByUserId(@PathVariable int userId){
 		return bookingService.getBookingByUserId(userId);
 	}
 	
