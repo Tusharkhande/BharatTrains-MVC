@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import com.tk.bharat_trains.dto.requests.BookingRequest;
 import com.tk.bharat_trains.dto.requests.CancelRequest;
+import com.tk.bharat_trains.dto.requests.EmailRequest;
 import com.tk.bharat_trains.dto.response.CancelResponse;
 import com.tk.bharat_trains.dto.response.SearchResponse;
 import com.tk.bharat_trains.dto.response.SeatResponse;
@@ -26,6 +27,9 @@ public class BookingService {
 
 	@Autowired
 	private SeatService seatService;
+	
+//	@Autowired
+//	private NotificationService notificationService;
 
 	public ResponseEntity<Booking> bookTicket(SearchResponse searchResponse, int userId) {
 		BookingRequest bookingRequest = new BookingRequest();
@@ -59,6 +63,9 @@ public class BookingService {
 			booking.setUserId(userId);
 			bookingRepository.save(booking);
 			log.info("booking successful!");
+			
+			
+//			notificationService.sendMail(emailBuilder());
 			return new ResponseEntity<>(booking, HttpStatus.CREATED);
 		} else {
 			log.warn("booking unsuccessful!");
@@ -92,6 +99,7 @@ public class BookingService {
 				cancelResponse.setCancelStatus(true);
 				cancelResponse.setMessage("Ticket cancelled successfully!");
 				log.info("Ticket cancelled successfully!");
+//				notificationService.sendMail(emailBuilder());
 				return new ResponseEntity<>(cancelResponse, HttpStatus.OK);
 			}
 
@@ -105,4 +113,12 @@ public class BookingService {
 	public ResponseEntity<List<Booking>> getBookingByUserId(int userId) {
 		return new ResponseEntity<List<Booking>>(bookingRepository.findByUserId(userId), HttpStatus.OK);
 	}
+	
+//	public EmailRequest emailBuilder() {
+//		EmailRequest email = EmailRequest.builder().to("tusharkhande09@gmail.com")
+//				.subject("Testing")
+//				.body("How u doin...")
+//				.build();
+//		return email;
+//	}
 }

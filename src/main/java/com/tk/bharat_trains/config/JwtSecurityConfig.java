@@ -37,9 +37,11 @@ public class JwtSecurityConfig {
 	@Bean
 	public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 		return http.csrf().disable().httpBasic().and()
-				.authorizeHttpRequests(auth -> auth.requestMatchers("/api/train/search**").hasRole("USER")
-						.requestMatchers("/api/train/booking/**").hasRole("USER")
+				.authorizeHttpRequests(auth -> auth
 						.requestMatchers("/api/train/**").hasRole("ADMIN")
+						.requestMatchers("/api/train/search**").hasRole("USER")
+						.requestMatchers("/api/train/booking/**").hasRole("USER")
+//						.requestMatchers("/api/train/search**", "/api/train/booking/**").hasRole("USER")
 						.requestMatchers("/api/auth/**").permitAll()
 						.anyRequest().authenticated())
 				.addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class)

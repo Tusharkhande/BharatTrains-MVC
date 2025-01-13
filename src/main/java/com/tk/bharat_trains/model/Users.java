@@ -48,7 +48,6 @@ public class Users implements UserDetails{
 		return List.of(new SimpleGrantedAuthority("ROLE_" +role.name()));
 	}
 	
-	
 	@Override
     public boolean isAccountNonExpired() {
         return true;

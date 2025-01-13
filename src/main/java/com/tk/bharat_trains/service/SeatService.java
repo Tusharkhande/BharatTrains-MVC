@@ -161,6 +161,7 @@ public class SeatService {
 					return new ResponseEntity<Boolean>(cancelStatus, HttpStatus.NOT_FOUND);
 				}else {
 					seats.remove(Integer.valueOf(seatToCancel));
+					log.info(seats + "");
 				}
 
 				station.setSeats(seats);
