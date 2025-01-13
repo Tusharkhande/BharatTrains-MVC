@@ -25,6 +25,7 @@ public class JwtSecurityConfig {
 	@Autowired
 	JwtFilter jwtFilter;
 
+	
 	@Bean
 	public PasswordEncoder encoder() {
 		return new BCryptPasswordEncoder();
