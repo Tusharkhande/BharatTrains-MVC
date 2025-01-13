@@ -1,5 +1,6 @@
 package com.tk.bharat_trains.config;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -12,21 +13,25 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+
+import com.tk.bharat_trains.filter.JwtFilter;
 
 
 @EnableWebSecurity
 @Configuration
 public class JwtSecurityConfig {
+	
+	@Autowired
+	JwtFilter jwtFilter;
 
 	@Bean
 	public PasswordEncoder encoder() {
 		return new BCryptPasswordEncoder();
 	}
 
-	@Bean
-	public MyUserDetailsService userDetailsService() {
-		return new MyUserDetailsService();
-	}
+	@Autowired
+	MyUserDetailsService userDetailsService;
 
 	@Bean
 	public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
@@ -36,10 +41,8 @@ public class JwtSecurityConfig {
 						.requestMatchers("/api/train/**").hasRole("ADMIN")
 						.requestMatchers("/api/auth/**").permitAll()
 						.anyRequest().authenticated())
-				.sessionManagement()
-				.sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-				.and()
-				.authenticationProvider(authenticationProvider(userDetailsService()))
+				.addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class)
+				.authenticationProvider(authenticationProvider(userDetailsService))
 				.build();
 	}
 
