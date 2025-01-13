@@ -8,11 +8,11 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
-import com.tk.bharat_trains.dto.BookingRequest;
-import com.tk.bharat_trains.dto.CancelRequest;
-import com.tk.bharat_trains.dto.CancelResponse;
-import com.tk.bharat_trains.dto.SearchResponse;
-import com.tk.bharat_trains.dto.SeatResponse;
+import com.tk.bharat_trains.dto.requests.BookingRequest;
+import com.tk.bharat_trains.dto.requests.CancelRequest;
+import com.tk.bharat_trains.dto.response.CancelResponse;
+import com.tk.bharat_trains.dto.response.SearchResponse;
+import com.tk.bharat_trains.dto.response.SeatResponse;
 import com.tk.bharat_trains.model.Booking;
 import com.tk.bharat_trains.repository.BookingRepository;
 

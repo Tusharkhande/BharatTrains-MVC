@@ -8,10 +8,10 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
-import com.tk.bharat_trains.dto.Route;
-import com.tk.bharat_trains.dto.SearchRequest;
-import com.tk.bharat_trains.dto.SearchResponse;
-import com.tk.bharat_trains.dto.Stations;
+import com.tk.bharat_trains.dto.requests.SearchRequest;
+import com.tk.bharat_trains.dto.response.Route;
+import com.tk.bharat_trains.dto.response.SearchResponse;
+import com.tk.bharat_trains.dto.response.Stations;
 import com.tk.bharat_trains.model.Routes;
 import com.tk.bharat_trains.repository.SearchRepository;
 

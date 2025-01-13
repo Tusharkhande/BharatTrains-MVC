@@ -10,10 +10,10 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
-import com.tk.bharat_trains.dto.AddStation;
-import com.tk.bharat_trains.dto.BookingRequest;
-import com.tk.bharat_trains.dto.CancelRequest;
-import com.tk.bharat_trains.dto.SeatResponse;
+import com.tk.bharat_trains.dto.requests.AddStation;
+import com.tk.bharat_trains.dto.requests.BookingRequest;
+import com.tk.bharat_trains.dto.requests.CancelRequest;
+import com.tk.bharat_trains.dto.response.SeatResponse;
 import com.tk.bharat_trains.model.StationToSeatMapping;
 import com.tk.bharat_trains.model.Train;
 import com.tk.bharat_trains.repository.SeatRepository;

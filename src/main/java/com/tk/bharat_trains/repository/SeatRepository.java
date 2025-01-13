@@ -5,7 +5,7 @@ import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import com.tk.bharat_trains.dto.SeatMappingResponse;
+import com.tk.bharat_trains.dto.response.SeatMappingResponse;
 import com.tk.bharat_trains.model.StationToSeatMapping;
 
 

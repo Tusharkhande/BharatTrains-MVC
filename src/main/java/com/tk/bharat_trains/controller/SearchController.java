@@ -10,8 +10,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.tk.bharat_trains.dto.SearchRequest;
-import com.tk.bharat_trains.dto.SearchResponse;
+import com.tk.bharat_trains.dto.requests.SearchRequest;
+import com.tk.bharat_trains.dto.response.SearchResponse;
 import com.tk.bharat_trains.model.Routes;
 import com.tk.bharat_trains.service.SearchService;
 

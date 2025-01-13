@@ -1,4 +1,4 @@
-package com.tk.bharat_trains.dto;
+package com.tk.bharat_trains.dto.response;
 
 import java.sql.Date;
 import java.util.List;

@@ -11,8 +11,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.tk.bharat_trains.dto.CancelResponse;
-import com.tk.bharat_trains.dto.SearchResponse;
+import com.tk.bharat_trains.dto.response.CancelResponse;
+import com.tk.bharat_trains.dto.response.SearchResponse;
 import com.tk.bharat_trains.model.Booking;
 import com.tk.bharat_trains.service.BookingService;
 

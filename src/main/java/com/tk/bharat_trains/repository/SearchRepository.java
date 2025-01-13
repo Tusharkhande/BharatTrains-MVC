@@ -7,8 +7,8 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
-import com.tk.bharat_trains.dto.Route;
-import com.tk.bharat_trains.dto.Stations;
+import com.tk.bharat_trains.dto.response.Route;
+import com.tk.bharat_trains.dto.response.Stations;
 import com.tk.bharat_trains.model.Routes;
 
 @Repository

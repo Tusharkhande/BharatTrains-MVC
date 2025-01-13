@@ -6,11 +6,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import com.tk.bharat_trains.dto.AddStation;
-import com.tk.bharat_trains.dto.BookingRequest;
-import com.tk.bharat_trains.dto.CancelRequest;
-import com.tk.bharat_trains.dto.SeatMappingResponse;
-import com.tk.bharat_trains.dto.SeatResponse;
+import com.tk.bharat_trains.dto.requests.AddStation;
+import com.tk.bharat_trains.dto.requests.BookingRequest;
+import com.tk.bharat_trains.dto.requests.CancelRequest;
+import com.tk.bharat_trains.dto.response.SeatMappingResponse;
+import com.tk.bharat_trains.dto.response.SeatResponse;
 import com.tk.bharat_trains.model.StationToSeatMapping;
 import com.tk.bharat_trains.service.SeatService;
 

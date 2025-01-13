@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.tk.bharat_trains.config.MyUserDetailsService;
-import com.tk.bharat_trains.dto.LoginRequest;
+import com.tk.bharat_trains.dto.requests.LoginRequest;
 import com.tk.bharat_trains.model.Users;
 import com.tk.bharat_trains.service.UserService;
 import com.tk.bharat_trains.utils.JwtUtil;
