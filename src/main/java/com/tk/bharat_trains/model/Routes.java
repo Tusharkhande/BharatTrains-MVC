@@ -1,4 +1,6 @@
 package com.tk.bharat_trains.model;
+import java.sql.Date;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -22,4 +24,6 @@ public class Routes {
 	private String arrivalTime;
 	
 	private String departureTime;
+	
+    private Date journeyDate;
 }

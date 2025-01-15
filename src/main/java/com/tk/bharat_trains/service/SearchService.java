@@ -25,7 +25,7 @@ public class SearchService {
 	TrainService trainService;
 	
 	public List<SearchResponse> search(SearchRequest searchRequest){
-		List<Route> routes = repository.findTrains(searchRequest.getSource(), searchRequest.getDestination());
+		List<Route> routes = repository.findTrains(searchRequest.getSource(), searchRequest.getDestination(), searchRequest.getJourneyDate());
 		List<SearchResponse> searchResponses = new ArrayList<>();
 		
 		for(Route route: routes) {
@@ -47,6 +47,7 @@ public class SearchService {
 		}
 		
 		return searchResponses;
+		
 		
 	}
 	

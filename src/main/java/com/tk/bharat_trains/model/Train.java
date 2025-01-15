@@ -15,4 +15,5 @@ public class Train {
     private String trainId;
     private String trainName;
     private int seatCount;
+    
 }

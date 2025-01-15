@@ -34,7 +34,7 @@ public class SeatService {
 	public ResponseEntity<SeatResponse> isSeatAvailable(BookingRequest bookingRequest) {
 		SeatResponse seatResponse = new SeatResponse();
 		
-		List<StationToSeatMapping> route = seatRepository.findAllByTrainTrainId(bookingRequest.getTrainId());
+		List<StationToSeatMapping> route = seatRepository.findAllByTrainTrainId(bookingRequest.getTrainId(), bookingRequest.getJourneyDate());
 		
 		Train train = trainRepository.findByTrainId(bookingRequest.getTrainId());
 		
