@@ -36,6 +36,7 @@ public class SearchViewController {
 //		System.out.println(searchService.search(searchRequest));
 //		model.addAttribute("trainList", searchService.search(searchRequest));
 		redirectAttributes.addFlashAttribute("trainList", searchService.search(searchRequest));
+		redirectAttributes.addFlashAttribute("searchRequest", searchRequest);
 		return "redirect:/bharattrains/book";
 	}
 }

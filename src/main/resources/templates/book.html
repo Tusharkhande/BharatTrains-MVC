@@ -3,6 +3,41 @@
 	th:replace="~{base::layout(~{::div})}">
 <head></head>
 <body>
-	
+	<div class="container-fluid pt-2">
+    <p style="border: 1px solid; padding: 5px; margin-top: 5px;">
+        <strong th:text="${trainList.size()}"></strong> Results Found for
+        <strong th:text="${source}"></strong> to
+        <strong th:text="${destination}"></strong> on
+        <strong th:text="${journeyDate}"></strong>
+    </p>
+
+    <div class="row">
+        <div th:each="train : ${trainList}" class="col-6 mt-2">
+            <div class="card">
+                <div class="card-header bg-secondary text-white">
+                    <span th:text="${train.trainName}"></span> (<span th:text="${train.trainId}"></span>)
+                </div>
+                <div class="card-body">
+                    <div class="row pb-2">
+                        <div class="col-5">
+                            <span th:text="${train.departureTime}"></span> | 
+                            <span th:text="${train.source}"></span> |
+                            <span th:text="${train.journeyDate}"></span>
+                        </div>
+                        <div class="col-2 text-center">
+                            Travel Time
+                        </div>
+                        <div class="col-5 text-end">
+                            <span th:text="${train.arrivalTime}"></span> | 
+                            <span th:text="${train.destination}"></span>
+                        </div>
+                    </div>
+                    <button class="btn btn-success btn-sm" type="button">Book Now</button>
+                    <button class="btn btn-secondary btn-sm" type="button">Check Availability</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 </body>
 </html>

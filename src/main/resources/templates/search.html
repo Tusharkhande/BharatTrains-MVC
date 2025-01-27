@@ -42,7 +42,7 @@
 										</div>
 										<div class="col-6">
 											<label class="form-label" for="destination">To
-												Station</label> <select th:field="*{destination}"
+												Station</label> <select required th:field="*{destination}"
 												class="form-select">
 												<option value="">To Station</option>
 												<option th:each="station : ${stationList}"
