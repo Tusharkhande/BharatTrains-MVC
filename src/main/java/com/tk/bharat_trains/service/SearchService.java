@@ -64,4 +64,8 @@ public class SearchService {
 			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
+	
+	public List<String> getAllStations(){
+		return repository.findAllStations();
+	}
 }

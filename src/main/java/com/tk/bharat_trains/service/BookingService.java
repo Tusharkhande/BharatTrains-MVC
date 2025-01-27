@@ -10,12 +10,14 @@ import org.springframework.stereotype.Service;
 
 import com.tk.bharat_trains.dto.requests.BookingRequest;
 import com.tk.bharat_trains.dto.requests.CancelRequest;
+import com.tk.bharat_trains.dto.requests.EmailRequest;
 import com.tk.bharat_trains.dto.response.CancelResponse;
 import com.tk.bharat_trains.dto.response.SearchResponse;
 import com.tk.bharat_trains.dto.response.SeatResponse;
 import com.tk.bharat_trains.model.Booking;
 import com.tk.bharat_trains.repository.BookingRepository;
 
+import jakarta.transaction.Transactional;
 import lombok.extern.slf4j.Slf4j;
 
 @Service
@@ -26,8 +28,11 @@ public class BookingService {
 
 	@Autowired
 	private SeatService seatService;
+	
+	@Autowired
+	private NotificationService notificationService;
 
-
+	@Transactional
 	public ResponseEntity<Booking> bookTicket(SearchResponse searchResponse, int userId) {
 		BookingRequest bookingRequest = new BookingRequest();
 		bookingRequest.setSource(searchResponse.getSource());
@@ -59,6 +64,7 @@ public class BookingService {
 			booking.setTrainName(searchResponse.getTrainName());
 			booking.setUserId(userId);
 			bookingRepository.save(booking);
+			notificationService.sendMail(new EmailRequest("goswaa0@gmail.com", "khandetushar2001@gmail.com", "Hello"));
 			log.info("booking successful!");
 						
 			return new ResponseEntity<>(booking, HttpStatus.CREATED);
@@ -86,6 +92,7 @@ public class BookingService {
 			cancelRequest.setSource(booking.getSource());
 			cancelRequest.setDestination(booking.getDestination());
 			cancelRequest.setTrainId(booking.getTrainId());
+			cancelRequest.setJourneyDate(booking.getJourneyDate());
 
 			ResponseEntity<Boolean> seatCancelStatus = seatService.cancelTicket(cancelRequest);
 

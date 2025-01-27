@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head></head>
+<body>
+    <nav th:fragment="navbar" class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="/bharattrains/home">Bharat Trains</a>
+            <div class="collapse navbar-collapse">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="/bharattrains/users/login">Login</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/bharattrains/users/register">Register</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/bharattrains/users/register">Register</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    
+    <footer th:fragment="footer" class="text-center p-3 bg-light mt-5">
+        &copy; 2025 Bharat Trains. All rights reserved.
+    </footer>
+</body>
+</html>

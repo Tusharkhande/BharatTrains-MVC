@@ -137,15 +137,15 @@ public class SeatService {
 	}
 	
 	public ResponseEntity<Boolean> cancelTicket(CancelRequest cancelRequest){
-		List<StationToSeatMapping> route = seatRepository.findAllByTrainTrainId(cancelRequest.getTrainId());
+		List<StationToSeatMapping> route = seatRepository.findAllByTrainTrainId(cancelRequest.getTrainId(), cancelRequest.getJourneyDate());
 		boolean cancelStatus = false;
 		if(route.isEmpty()) {
+			log.error("empty");
 			return new ResponseEntity<Boolean>(cancelStatus, HttpStatus.NOT_FOUND);
 		}
 		int seatToCancel = cancelRequest.getSeatId();
 		log.info("seattocancel: " + seatToCancel);
 		boolean track = false;
-		
 		
 		for(StationToSeatMapping station : route) {
 			if(station.getStation().equals(cancelRequest.getSource())) {

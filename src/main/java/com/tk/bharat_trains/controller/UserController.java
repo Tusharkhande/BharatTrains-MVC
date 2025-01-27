@@ -24,6 +24,7 @@ import com.tk.bharat_trains.utils.JwtUtil;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api/auth/users")
@@ -52,6 +53,10 @@ public class UserController {
 		try {
 			authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(loginRequest.getUsername(), loginRequest.getPassword()));
 			UserDetails userDetails = userDetailsService.loadUserByUsername(loginRequest.getUsername());
+			List<String> roles = userDetails.getAuthorities().stream()
+					.map(grantedAuthority -> grantedAuthority.getAuthority())
+					.collect(Collectors.toList());
+			System.out.println(roles);
 			String jwt = jwtUtil.generateToken(userDetails.getUsername());
 			return new ResponseEntity<String>(jwt, HttpStatus.OK);
 		}catch(Exception e) {

@@ -19,4 +19,7 @@ public interface SearchRepository extends JpaRepository<Routes, Integer>{
 	
 	@Query("SELECT new com.tk.bharat_trains.dto.response.Stations(R.station) FROM Routes R WHERE R.trainId = :trainId")
     List<Stations> findByTrainId(String trainId);
+	
+	@Query("SELECT distinct R.station FROM Routes R")
+    List<String> findAllStations();
 }
