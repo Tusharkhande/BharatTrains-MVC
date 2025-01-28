@@ -1,5 +1,7 @@
 package com.tk.bharat_trains.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -13,9 +15,9 @@ public class TrainService {
 	@Autowired
 	TrainRepository repository;
 	
-	public ResponseEntity<Train> saveTrain(Train train){
+	public ResponseEntity<Train> saveTrain(List<Train> trains){
 		try {
-			repository.save(train);
+			repository.saveAll(trains);
 			return new ResponseEntity<>(HttpStatus.CREATED);
 		}catch(Exception e) {
 			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);

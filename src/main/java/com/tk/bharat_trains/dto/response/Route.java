@@ -10,6 +10,6 @@ import lombok.NoArgsConstructor;
 public class Route {
 	private String trainId;
     private String station;
-    private String arrivalTime;
     private String departureTime;
+    private String arrivalTime;
 }

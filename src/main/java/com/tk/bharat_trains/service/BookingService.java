@@ -64,7 +64,7 @@ public class BookingService {
 			booking.setTrainName(searchResponse.getTrainName());
 			booking.setUserId(userId);
 			bookingRepository.save(booking);
-			notificationService.sendMail(new EmailRequest("goswaa0@gmail.com", "khandetushar2001@gmail.com", "Hello"));
+//			notificationService.sendMail(new EmailRequest("goswaa0@gmail.com", "khandetushar2001@gmail.com", "Hello"));
 			log.info("booking successful!");
 						
 			return new ResponseEntity<>(booking, HttpStatus.CREATED);

@@ -1,10 +1,13 @@
-
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" th:replace="base::layout(~{::section})">
-<head></head>
-<body>
-    <section class="card p-4 mx-auto" style="max-width: 400px;">
-        <h3 class="text-center">Login</h3>
+<head>
+    <title>Login</title>
+    <!-- Add Bootstrap CSS -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="bg-light d-flex justify-content-center align-items-center mx-auto vh-100">
+    <section class="card mx-auto p-4 shadow-lg" style="max-width: 400px;">
+        <h3 class="text-center mb-4">Login</h3>
         <form th:action="@{/bharattrains/auth/login}" method="post">
             <div class="mb-3">
                 <label class="form-label">Username</label>
@@ -17,5 +20,10 @@
             <button type="submit" class="btn btn-success w-100">Login</button>
         </form>
     </section>
+
+    <!-- Add Bootstrap JS and dependencies -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>

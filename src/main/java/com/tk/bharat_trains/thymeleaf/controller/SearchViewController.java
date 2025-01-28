@@ -14,6 +14,8 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.tk.bharat_trains.dto.requests.SearchRequest;
 import com.tk.bharat_trains.service.SearchService;
 
+import jakarta.servlet.http.HttpSession;
+
 @Controller
 @RequestMapping("/bharattrains")
 public class SearchViewController {
@@ -22,21 +24,25 @@ public class SearchViewController {
 	SearchService searchService;
 	
 	@GetMapping("/search")
-	public String search(Model model) {
+	public String search(Model model, HttpSession session) {
 		List<String> stationList =  searchService.getAllStations();
 		System.out.println(stationList);
+		session.setAttribute("stationList", stationList);
 		model.addAttribute("stationList",stationList);
 		model.addAttribute(new SearchRequest());
 		return "search";
 	}
 	
 	@PostMapping("/search")
-	public String searchResponse(@ModelAttribute SearchRequest searchRequest, Model model, RedirectAttributes redirectAttributes) {
+	public String searchResponse(@ModelAttribute SearchRequest searchRequest, Model model,HttpSession session, RedirectAttributes redirectAttributes) {
 //		System.out.println(searchRequest);
 //		System.out.println(searchService.search(searchRequest));
 //		model.addAttribute("trainList", searchService.search(searchRequest));
 		redirectAttributes.addFlashAttribute("trainList", searchService.search(searchRequest));
 		redirectAttributes.addFlashAttribute("searchRequest", searchRequest);
+		session.setAttribute("searchRequest", searchRequest);
+		model.addAttribute(searchRequest);
+		
 		return "redirect:/bharattrains/book";
 	}
 }

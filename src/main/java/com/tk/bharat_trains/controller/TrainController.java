@@ -1,5 +1,7 @@
 package com.tk.bharat_trains.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,8 +22,8 @@ public class TrainController {
 	TrainService service;
 	
 	@PostMapping
-	public ResponseEntity<Train> addTrain(@RequestBody Train train){
-		return service.saveTrain(train);
+	public ResponseEntity<Train> addTrain(@RequestBody List<Train> trains){
+		return service.saveTrain(trains);
 	}
 	
 	@GetMapping("/{trainId}")

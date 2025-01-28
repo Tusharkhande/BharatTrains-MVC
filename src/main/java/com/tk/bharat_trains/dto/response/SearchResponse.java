@@ -19,4 +19,5 @@ public class SearchResponse {
     private String arrivalTime;
     private String departureTime;
     private Date journeyDate;
+    private String travelTime;
 }

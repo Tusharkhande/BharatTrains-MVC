@@ -48,7 +48,7 @@ public class UserController {
 		return service.saveUser(user);
 	}
 	
-	@PostMapping("/login")
+	@GetMapping("/login")
 	public ResponseEntity<String> login(@RequestBody LoginRequest loginRequest){
 		try {
 			authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(loginRequest.getUsername(), loginRequest.getPassword()));

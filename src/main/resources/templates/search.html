@@ -3,24 +3,6 @@
 	th:replace="~{base::layout(~{::div})}">
 <head></head>
 <body>
-	<!-- <div class="card p-4 mx-auto" style="max-width: 600px;">
-        <h3 class="text-center">Search Trains</h3>
-        <form th:action="@{/bharattrains/search}" th:object="${searchRequest}" method="post">
-            <div class="mb-3">
-                <label class="form-label">From</label>
-                <input type="text" class="form-control" th:field="*{source}" required>
-            </div>
-            <div class="mb-3">
-                <label class="form-label">To</label>
-                <input type="text" class="form-control" th:field="*{destination}" required>
-            </div>
-            <div class="mb-3">
-                <label class="form-label">Date</label>
-                <input type="date" class="form-control" th:field="*{journeyDate}" required>
-            </div>
-            <button type="submit" class="btn btn-primary w-100">Search</button>
-        </form>
-    </div> -->
 	<div th:if="${searchResponse}==null" class="container">
 		<div class="row d-flex justify-content-center align-items-center">
 			<div class="col-lg-12 col-xl-11">
