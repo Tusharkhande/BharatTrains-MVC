@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.tk.bharat_trains.config.MyUserDetailsService;
 import com.tk.bharat_trains.dto.requests.LoginRequest;
@@ -23,6 +24,7 @@ import com.tk.bharat_trains.model.Users;
 import com.tk.bharat_trains.service.UserService;
 import com.tk.bharat_trains.utils.JwtUtil;
 
+import jakarta.servlet.http.HttpSession;
 import lombok.extern.slf4j.Slf4j;
 
 @Controller
@@ -49,9 +51,13 @@ public class UserViewController {
     }
 
     @PostMapping("/register")
-    public String registerUser(@ModelAttribute Users user, Model model) {
-        service.saveUser(user);
-        return "redirect:/login";
+    public String registerUser(@ModelAttribute Users user, Model model, RedirectAttributes redirectAttributes, HttpSession session) {
+        System.out.println(user);
+//        model.addAttribute("registrationSuccess", true);
+//        session.setAttribute("registrationSuccess", "success");
+        redirectAttributes.addFlashAttribute("success", true);
+//        service.saveUser(user);
+        return "redirect:/bharattrains/auth/register";
     }
 
     @GetMapping("/login")

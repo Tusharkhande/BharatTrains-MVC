@@ -13,7 +13,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 
-import com.tk.bharat_trains.model.Role;
+import com.tk.bharat_trains.repository.enums.Role;
 
 //@EnableWebSecurity
 //@Configuration

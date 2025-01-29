@@ -12,6 +12,8 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import com.tk.bharat_trains.repository.enums.Role;
+
 @Entity
 @Table(name = "users")
 @Data
@@ -35,13 +37,15 @@ public class Users implements UserDetails{
     private String email;
 
     @Column(name = "phoneno")
-    private int phoneno;
+    private long phoneno;
 
     @Column(name = "address")
     private String address;
     
     @Enumerated(EnumType.STRING)
     private Role role;
+    
+    private String gender;
     
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
