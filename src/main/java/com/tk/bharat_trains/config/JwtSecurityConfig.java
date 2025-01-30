@@ -17,15 +17,16 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 
 import com.tk.bharat_trains.filter.JwtFilter;
 
-
 @EnableWebSecurity
 @Configuration
 public class JwtSecurityConfig {
-	
+
 	@Autowired
 	JwtFilter jwtFilter;
-
 	
+	@Autowired
+	RoleBasedAuthSuccessHandler successHandler;
+
 	@Bean
 	public PasswordEncoder encoder() {
 		return new BCryptPasswordEncoder();
@@ -36,19 +37,19 @@ public class JwtSecurityConfig {
 
 	@Bean
 	public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-		return http.csrf().disable().httpBasic().and()
-				.sessionManagement()
-					.sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-					.and()
-				.authorizeHttpRequests(auth -> auth
-						.requestMatchers("/api/train/search**").hasRole("USER")
-						.requestMatchers("/api/train/booking/**").hasRole("USER")
-						.requestMatchers("/api/train/**").hasRole("ADMIN")
+		return http.csrf().disable().httpBasic().and().sessionManagement()
+				.sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
+				.authorizeHttpRequests(auth -> auth.requestMatchers("/api/train/search**").hasRole("USER")
+						.requestMatchers("/api/train/booking/**").hasRole("USER").requestMatchers("/api/train/**")
+						.hasRole("ADMIN")
 //						.requestMatchers("/api/train/search**", "/api/train/booking/**").hasRole("USER")
-						.requestMatchers("/api/auth/**").permitAll()
-						.anyRequest().authenticated())
+						.requestMatchers("/api/auth/**").permitAll().anyRequest().authenticated())
 				.addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class)
 				.authenticationProvider(authenticationProvider(userDetailsService))
+				
+				.formLogin().loginPage("/bharattrains/auth/login").successHandler(successHandler).permitAll().and()
+				.logout(logout -> logout.logoutUrl("/logout").invalidateHttpSession(true).clearAuthentication(true)
+						.deleteCookies("JSESSIONID").logoutSuccessUrl("/bharattrains/auth/login?logout"))
 				.build();
 	}
 
@@ -59,9 +60,9 @@ public class JwtSecurityConfig {
 		auth.setPasswordEncoder(encoder());
 		return auth;
 	}
-	
+
 	@Bean
-    public AuthenticationManager authenticationManager(AuthenticationConfiguration auth) throws Exception {
-        return auth.getAuthenticationManager();
-    }
+	public AuthenticationManager authenticationManager(AuthenticationConfiguration auth) throws Exception {
+		return auth.getAuthenticationManager();
+	}
 }

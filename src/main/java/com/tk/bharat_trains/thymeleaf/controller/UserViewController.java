@@ -65,8 +65,20 @@ public class UserViewController {
         return "login";
     }
     
+//    @GetMapping("/logout")
+//    public String logout(HttpSession session) {
+//    	session.removeAttribute("jwt");
+//    	session.removeAttribute("role");
+//    	session.removeAttribute("success");
+//    	
+//        if (session != null) {
+//            session.invalidate();
+//        }
+//        return "redirect:/bharattrains/auth/login?logout";
+//    }
+    
     @PostMapping("/login")
-    public String loginUser(@ModelAttribute LoginRequest loginRequest, BindingResult result) {
+    public String loginUser(@ModelAttribute LoginRequest loginRequest, BindingResult result, HttpSession session) {
     	System.out.println("loginRequest: "+loginRequest);
     	if(result.hasErrors()) {
     		System.out.println(result);
@@ -78,9 +90,12 @@ public class UserViewController {
 			List<String> roles = userDetails.getAuthorities().stream()
 					.map(grantedAuthority -> grantedAuthority.getAuthority())
 					.collect(Collectors.toList());
-			System.out.println(roles);
-			log.info(jwt);
-			return "redirect:/bharattrains/auth/login";
+//			System.out.println(roles);
+//			log.info(jwt);
+			session.setAttribute("jwt", jwt);
+			session.setAttribute("role", roles.get(0));
+			session.setAttribute("success",true);
+			return "redirect:/bharattrains/home";
 		}catch(Exception e) {
 			log.error("Exception occurred while createAuthenticationToken " + e);
             return "redirect:/bharattrains/auth/login";
