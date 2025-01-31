@@ -25,7 +25,7 @@ public class RoleBasedAuthSuccessHandler implements AuthenticationSuccessHandler
 		if (roles.contains("ROLE_ADMIN")) {
 			response.sendRedirect("/bharattrains/admin/dashboard");
 		} else {
-			response.sendRedirect("/bharattrains/user/home");
+			response.sendRedirect("/bharattrains/home");
 		}
 		
 	}

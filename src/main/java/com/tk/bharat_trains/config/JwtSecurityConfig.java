@@ -17,8 +17,8 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 
 import com.tk.bharat_trains.filter.JwtFilter;
 
-@EnableWebSecurity
-@Configuration
+//@EnableWebSecurity
+//@Configuration
 public class JwtSecurityConfig {
 
 	@Autowired
@@ -37,19 +37,20 @@ public class JwtSecurityConfig {
 
 	@Bean
 	public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-		return http.csrf().disable().httpBasic().and().sessionManagement()
-				.sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
+		return http.csrf().disable().httpBasic().and()
+//				.sessionManagement()
+//				.sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED).and()
 				.authorizeHttpRequests(auth -> auth.requestMatchers("/api/train/search**").hasRole("USER")
 						.requestMatchers("/api/train/booking/**").hasRole("USER").requestMatchers("/api/train/**")
 						.hasRole("ADMIN")
 //						.requestMatchers("/api/train/search**", "/api/train/booking/**").hasRole("USER")
-						.requestMatchers("/api/auth/**").permitAll().anyRequest().authenticated())
-				.addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class)
-				.authenticationProvider(authenticationProvider(userDetailsService))
+						.requestMatchers("/api/auth/**", "/bharattrains/auth/**").permitAll().anyRequest().authenticated())
 				
 				.formLogin().loginPage("/bharattrains/auth/login").successHandler(successHandler).permitAll().and()
-				.logout(logout -> logout.logoutUrl("/logout").invalidateHttpSession(true).clearAuthentication(true)
+				.logout(logout -> logout.logoutUrl("/bharattrains/auth/logout").invalidateHttpSession(true).clearAuthentication(true)
 						.deleteCookies("JSESSIONID").logoutSuccessUrl("/bharattrains/auth/login?logout"))
+				.addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class)
+				.authenticationProvider(authenticationProvider(userDetailsService))
 				.build();
 	}
 

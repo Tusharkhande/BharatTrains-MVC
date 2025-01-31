@@ -11,7 +11,17 @@ public class HomeController {
     
     @GetMapping("/home")
 	public String showHomePage() {
-		return "base";
+		return "home";
 	}
-
+    
+    @GetMapping("/about")
+	public String showAboutPage() {
+		return "about";
+	}
+    
+    @GetMapping("/contact")
+    public String showContactPage() {
+    		return "contactUs";
+    }
+        
 }
