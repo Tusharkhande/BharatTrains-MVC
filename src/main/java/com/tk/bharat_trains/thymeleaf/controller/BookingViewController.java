@@ -73,11 +73,11 @@ public class BookingViewController {
 		return "booking-successful";
 	}
 	
-	@GetMapping("/bookings")
+	@GetMapping("/user/bookings")
 	public String bookings(Model model, Principal principal) {
 		Users user = userService.getUserByUsername(principal.getName());
 		List<Booking> bookings = bookingService.getBookingByUserId(user.getUserId()).getBody();
 		model.addAttribute("bookings", bookings);
-		return "bookings";
+		return "user/bookings";
 	}
 }

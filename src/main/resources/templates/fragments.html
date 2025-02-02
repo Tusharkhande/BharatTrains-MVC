@@ -34,19 +34,6 @@
                             <a class="dropdown-item" href="/bharattrains/auth/logout">Logout</a> <!-- Logout Link -->
                         </div>
                     </li>
-                    <!-- User Icon Dropdown -->
-<li class="nav-item dropdown" sec:authorize="isAuthenticated()">
-<a class="nav-link dropdown-toggle d-flex align-items-center" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-expanded="false">
-<img th:src="@{/images/user-profile.png}" alt="Profile" class="rounded-circle" width="35" height="35">
-</a>
-<div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown" style="right: 0; left: auto;">
-<a class="dropdown-item" href="/bharattrains/user/profile">User Profile</a>
-<div class="dropdown-divider"></div>
-<a class="dropdown-item" href="/bharattrains/auth/logout">Logout</a>
-</div>
-</li>
-
- 
                 </ul>
             </div>
         </div>

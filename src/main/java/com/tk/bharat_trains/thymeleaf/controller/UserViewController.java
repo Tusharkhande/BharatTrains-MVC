@@ -1,4 +1,5 @@
 package com.tk.bharat_trains.thymeleaf.controller;
+import java.security.Principal;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -28,78 +29,33 @@ import jakarta.servlet.http.HttpSession;
 import lombok.extern.slf4j.Slf4j;
 
 @Controller
-@RequestMapping("/bharattrains/auth")
+@RequestMapping("/bharattrains/user")
 @Slf4j
 public class UserViewController {
 
 	@Autowired
 	UserService service;
-	
-	@Autowired
-	AuthenticationManager authenticationManager;
-	
-	@Autowired
-	MyUserDetailsService userDetailsService;
-	
-	@Autowired
-	JwtUtil jwtUtil;
 
-    @GetMapping("/register")
-    public String showRegistrationForm(Model model) {
-        model.addAttribute("user", new Users());
-        return "register";
-    }
-
-    @PostMapping("/register")
-    public String registerUser(@ModelAttribute Users user, Model model, RedirectAttributes redirectAttributes, HttpSession session) {
-        System.out.println(user);
-//        model.addAttribute("registrationSuccess", true);
-//        session.setAttribute("registrationSuccess", "success");
-        redirectAttributes.addFlashAttribute("success", true);
-//        service.saveUser(user);
-        return "redirect:/bharattrains/auth/register";
-    }
-
-    @GetMapping("/login")
-    public String showLoginForm() {
-        return "login";
+    @GetMapping("/profile")
+    public String userProfile(Model model, Principal principal) {
+        String name = principal.getName();
+        Users user = service.getUserByUsername(name);
+        model.addAttribute("user", user);
+        return "user/user-profile";
     }
     
-//    @GetMapping("/logout")
-//    public String logout(HttpSession session) {
-//    	session.removeAttribute("jwt");
-//    	session.removeAttribute("role");
-//    	session.removeAttribute("success");
-//    	
-//        if (session != null) {
-//            session.invalidate();
-//        }
-//        return "redirect:/bharattrains/auth/login?logout";
-//    }
-    
-    @PostMapping("/login")
-    public String loginUser(@ModelAttribute LoginRequest loginRequest, BindingResult result, HttpSession session) {
-    	System.out.println("loginRequest: "+loginRequest);
-    	if(result.hasErrors()) {
-    		System.out.println(result);
-    	}
+    @PostMapping("/update")
+    public String updateProfile(@ModelAttribute Users user, RedirectAttributes redirectAttributes, HttpSession session) {
+    	Users loggedUser = (Users)session.getAttribute("user");
     	try {
-			authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(loginRequest.getUsername(), loginRequest.getPassword()));
-			UserDetails userDetails = userDetailsService.loadUserByUsername(loginRequest.getUsername());
-			String jwt = jwtUtil.generateToken(userDetails.getUsername());
-			List<String> roles = userDetails.getAuthorities().stream()
-					.map(grantedAuthority -> grantedAuthority.getAuthority())
-					.collect(Collectors.toList());
-//			System.out.println(roles);
-//			log.info(jwt);
-			session.setAttribute("jwt", jwt);
-			session.setAttribute("role", roles.get(0));
-			session.setAttribute("success",true);
-			return "redirect:/bharattrains/home";
-		}catch(Exception e) {
-			log.error("Exception occurred while createAuthenticationToken " + e);
-            return "redirect:/bharattrains/auth/login";
-		}
+            service.updateUser(0, user);
+            redirectAttributes.addFlashAttribute("success", "Profile updated successfully!");
+    	}
+    	catch(Exception e) {
+    		redirectAttributes.addFlashAttribute("error", "Profile update failed");
+    	}
+    	
+        return "redirect:/bharattrains/user/profile";
     }
 
 //    @GetMapping("/{userId}")
