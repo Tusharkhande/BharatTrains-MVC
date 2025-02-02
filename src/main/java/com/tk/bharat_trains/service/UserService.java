@@ -39,13 +39,8 @@ public class UserService {
 		}
 	}
 	
-	public ResponseEntity<Users> getUser(int id) {
-		Users user = repository.findByUserId(id);
-		if(user == null) {
-			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-		}else {
-			return new ResponseEntity<>(user, HttpStatus.OK);
-		}
+	public Users getUserById(int id) {
+		return repository.findByUserId(id);
 	}
 	
 	public List<Users> getUsers(){
@@ -69,6 +64,10 @@ public class UserService {
         
         repository.save(existingUser);
         return new ResponseEntity<>(HttpStatus.OK);
+	}
+	
+	public Users getUserByUsername(String username) {
+		return repository.findByUsername(username);
 	}
 	
 }

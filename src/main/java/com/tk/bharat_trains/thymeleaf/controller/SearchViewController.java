@@ -37,8 +37,8 @@ public class SearchViewController {
 	public String searchResponse(@ModelAttribute SearchRequest searchRequest, Model model,HttpSession session, RedirectAttributes redirectAttributes) {
 //		System.out.println(searchRequest);
 //		System.out.println(searchService.search(searchRequest));
-//		model.addAttribute("trainList", searchService.search(searchRequest));
-		redirectAttributes.addFlashAttribute("trainList", searchService.search(searchRequest));
+//		model.addAttribute("searchResponse", searchService.search(searchRequest));
+		redirectAttributes.addFlashAttribute("searchResponse", searchService.search(searchRequest));
 		redirectAttributes.addFlashAttribute("searchRequest", searchRequest);
 		session.setAttribute("searchRequest", searchRequest);
 		model.addAttribute(searchRequest);

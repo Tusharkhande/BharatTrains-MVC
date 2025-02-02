@@ -1,6 +1,7 @@
 package com.tk.bharat_trains.dto.requests;
 
 import java.sql.Date;
+import java.time.LocalDate;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -14,5 +15,5 @@ public class CancelRequest {
     private int seatId;
     private String source;
     private String destination;
-    private Date journeyDate;
+    private LocalDate journeyDate;
 }

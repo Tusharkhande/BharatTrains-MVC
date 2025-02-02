@@ -72,7 +72,12 @@ public class UserController {
 
 	@GetMapping("/{userId}")
 	public ResponseEntity<Users> getUser(@PathVariable int userId) {
-		return service.getUser(userId);
+		Users user =  service.getUserById(userId);
+		if(user == null) {
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		}else {
+			return new ResponseEntity<>(user, HttpStatus.OK);
+		}
 	}
 
 	@GetMapping("")

@@ -1,6 +1,7 @@
 package com.tk.bharat_trains.dto.requests;
 
 import java.sql.Date;
+import java.time.LocalDate;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -12,5 +13,5 @@ import lombok.NoArgsConstructor;
 public class SearchRequest {
     private String source;
     private String destination;
-    private Date journeyDate;
+    private LocalDate journeyDate;
 }

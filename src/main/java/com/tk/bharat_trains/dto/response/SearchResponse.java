@@ -5,7 +5,10 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.sql.Date;
+import java.time.LocalDate;
 import java.util.List;
+
+import org.springframework.format.annotation.DateTimeFormat;
 
 @Data
 @NoArgsConstructor
@@ -18,6 +21,7 @@ public class SearchResponse {
     private List<String> path;
     private String arrivalTime;
     private String departureTime;
-    private Date journeyDate;
+//    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private LocalDate journeyDate;
     private String travelTime;
 }

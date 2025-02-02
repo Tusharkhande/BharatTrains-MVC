@@ -1,6 +1,9 @@
 package com.tk.bharat_trains.model;
 
 import java.sql.Date;
+import java.time.LocalDate;
+
+import org.springframework.format.annotation.DateTimeFormat;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -28,6 +31,7 @@ public class Booking {
     private String destination;
     private int seatId;
     private String bookingStatus;
-    private Date journeyDate;
-    private Date bookingDate;
+//    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private LocalDate journeyDate;
+    private LocalDate bookingDate;
 }

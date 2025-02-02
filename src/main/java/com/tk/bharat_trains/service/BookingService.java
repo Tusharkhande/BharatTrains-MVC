@@ -1,6 +1,7 @@
 package com.tk.bharat_trains.service;
 
 import java.sql.Date;
+import java.time.LocalDate;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,7 +33,6 @@ public class BookingService {
 	@Autowired
 	private NotificationService notificationService;
 
-	@Transactional
 	public ResponseEntity<Booking> bookTicket(SearchResponse searchResponse, int userId) {
 		BookingRequest bookingRequest = new BookingRequest();
 		bookingRequest.setSource(searchResponse.getSource());
@@ -59,7 +59,7 @@ public class BookingService {
 			booking.setSeatId(seatResponse.getBody().getSeatId());
 			booking.setBookingStatus("CONFIRMED");
 			booking.setJourneyDate(bookingRequest.getJourneyDate());
-			booking.setBookingDate(new Date(System.currentTimeMillis()));
+			booking.setBookingDate(LocalDate.now());
 			booking.setTrainId(bookingRequest.getTrainId());
 			booking.setTrainName(searchResponse.getTrainName());
 			booking.setUserId(userId);
