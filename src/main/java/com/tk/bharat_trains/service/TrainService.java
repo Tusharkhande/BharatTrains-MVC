@@ -27,4 +27,9 @@ public class TrainService {
 	public String getTrainName(String trainId) {
 		return repository.findByTrainId(trainId).getTrainName();
 	}
+
+	public List<Train> getAllTrains() {
+		// TODO Auto-generated method stub
+		return repository.findAll();
+	}
 }

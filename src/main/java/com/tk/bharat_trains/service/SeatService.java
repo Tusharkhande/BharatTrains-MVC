@@ -172,5 +172,9 @@ public class SeatService {
 		}
 		return new ResponseEntity<>(cancelStatus, HttpStatus.OK);
 	}
+	
+	public List<StationToSeatMapping> getSeatsByTrainId(String trainId) {
+		return seatRepository.findAllByTrainTrainId(trainId);
+	}
 
 }

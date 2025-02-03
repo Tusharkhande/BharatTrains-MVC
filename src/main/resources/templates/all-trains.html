@@ -1,0 +1,101 @@
+<html xmlns:th="http://www.thymeleaf.org"
+	th:replace="~{base::layout(~{::div})}">
+<head>
+<title>Search Results</title>
+<!-- Add Bootstrap CSS -->
+<link
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+	rel="stylesheet">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+
+    <style>
+        .card {
+            transition: transform 0.3s, box-shadow 0.3s;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.2);
+        }
+        .train-route {
+            font-size: 16px;
+            color: #555;
+            font-weight: bold;
+            overflow: hidden;
+            white-space: nowrap;
+            display: inline-block;
+            position: relative;
+        }
+        .train-route:before {
+            content: "🚆 ";
+            animation: moveTrain 3s linear infinite;
+        }
+        @keyframes moveTrain {
+            0% { transform: translateX(-10px); }
+            50% { transform: translateX(5px); }
+            100% { transform: translateX(-10px); }
+        }
+        body {
+            background: #f4f4f9;
+        }
+        .heading {
+            animation: fadeIn 1.5s ease-in-out;
+        }
+        @keyframes fadeIn {
+            0% { opacity: 0; transform: translateY(-20px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+	<div class="container mt-5">
+		<h2 class="text-center">All Trains & Seat Availability</h2>
+		<!--
+		<div th:each="train : ${trains}" class="card mb-4  d-flex justify-center">
+			<div class="card-body">
+				<h4 class="card-title" th:text="${train.trainName}"></h4>
+				<p>
+					<strong>Train ID:</strong> <span th:text="${train.trainId}"></span>
+				</p>
+				<p>
+					<strong>Total Seats:</strong> <span th:text="${train.seatCount}"></span>
+				</p>
+
+				<h5 class="mt-3">Seat Availability</h5>
+				<table class="table table-bordered">
+					<thead>
+						<tr>
+							<th>Station</th>
+							<th>Available Seats</th>
+							<th>Journey Date</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="mapping : ${trainSeatMappings[train.trainId]}">
+							<td th:text="${mapping.station}"></td>
+							<td th:text="${#strings.listJoin(mapping.seats, ', ')}"></td>
+							<td th:text="${mapping.journeyDate}"></td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+		-->
+		<div class="row">
+        <div th:each="train : ${trains}" class="col-md-4">
+            <div class="card mb-4 shadow-sm">
+                <div class="card-body">
+                    <h4 class="card-title" th:text="${train.trainName}"></h4>
+                    <p><strong>Train ID:</strong> <span th:text="${train.trainId}"></span></p>
+                    <p><strong>Total Seats:</strong> <span th:text="${train.seatCount}"></span></p>
+
+                    <h5 class="mt-3">Train Route</h5>
+                    <p th:text="${#strings.listJoin(trainPaths[train.trainId], ' → ')}"></p>
+                </div>
+            </div>
+        </div>
+    </div>
+	</div>
+</body>
+</html>

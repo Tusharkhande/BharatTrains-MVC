@@ -18,6 +18,7 @@
                     <li class="nav-item"><a class="nav-link" href="/bharattrains/about">About</a></li>
                     <li class="nav-item"><a class="nav-link" href="/bharattrains/contact">Contact Us</a></li>
                     <li class="nav-item"><a class="nav-link" href="/bharattrains/search">Search Trains</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/bharattrains/trains">All Trains</a></li>
                     <li class="nav-item" sec:authorize="hasRole('ADMIN')"><a class="nav-link" href="/bharattrains/admin/dashboard">Dashboard</a></li>
                 </ul>
                 <ul class="navbar-nav ms-auto">
@@ -39,7 +40,7 @@
         </div>
     </nav>
         
-    <footer th:fragment="footer" class="text-center p-3 bg-light mt-5">
+    <footer th:fragment="footer" class="text-center text-white p-3 mt-5 bg-secondary">
         &copy; 2025 Bharat Trains. All rights reserved.
     </footer>
 </body>
