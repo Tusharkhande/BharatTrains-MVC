@@ -48,10 +48,11 @@ public class AuthController {
     }
 
     @PostMapping("/register")
-    public String registerUser(@ModelAttribute Users user, Model model) {
+    public String registerUser(@ModelAttribute Users user, RedirectAttributes redirectAttributes) {
         System.out.println(user);
 //        service.saveUser(user);
-        return "redirect:/bharattrains/auth/register";
+        redirectAttributes.addFlashAttribute("success", "User registered successfully!");
+        return "redirect:/bharattrains/auth/login";
     }
 
     @GetMapping("/login")

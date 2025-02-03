@@ -13,12 +13,19 @@
 	class="bg-light d-flex justify-content-center align-items-center mx-auto vh-100">
 	<section class="card mx-auto p-4 shadow-lg" style="max-width: 400px;">
 		<h3 class="text-center mb-4">Login</h3>
-		<p class="text-center text-success fs-6" sec:authorize="isAuthenticated()">
-			Already Logged in <a href="/bharattrains/auth/login"
-				class="text-decoration-none">Login</a>
-		</p>
-		<p class="text-center text-danger fs-6" th:if="${param.error}">
-			Invalid username or password. Please try again.</p>
+		<div sec:authorize="isAuthenticated()" class="alert alert-success alert-dismissible fade show" role="alert">
+        	<span th:text="'User Already logged in'"></span><a href="/bharattrains/home" class="text-decoration-none mx-3">Go Home</a>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        <div th:if="${success}" class="alert alert-success alert-dismissible fade show" role="alert">
+        	<span th:text="${success}"></span>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+            
+		<div th:if="${param.error}" class="alert alert-danger alert-dismissible fade show" role="alert">
+            <span th:text="'Invalid username or password. Please try again.'"></span>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+		</div>
 		<form th:action="@{/bharattrains/auth/login}" method="post">
 			<div class="mb-3">
 				<label class="form-label">Username</label> <input type="text"

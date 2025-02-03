@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.tk.bharat_trains.config.MyUserDetailsService;
@@ -57,6 +58,38 @@ public class UserViewController {
     	
         return "redirect:/bharattrains/user/profile";
     }
+    
+    @GetMapping("/change-password")
+    public String showChangePasswordForm() {
+      return "user/change-password";
+    }
+
+    @PostMapping("/change-password")
+    public String changePassword(@RequestParam String currentPassword,
+        @RequestParam String newPassword,
+        @RequestParam String confirmPassword,
+        RedirectAttributes redirectAttributes, HttpSession session) {
+    	Users user =(Users) session.getAttribute("user");
+      if (!service.checkPassword(user, currentPassword)) {
+        redirectAttributes.addFlashAttribute( "error", "Incorrect current password!");
+        return "redirect:/bharattrains/user/change-password";
+      }
+
+      if (!newPassword.equals(confirmPassword)) {
+        redirectAttributes.addFlashAttribute(
+            "error", "New passwords do not match!");
+
+        return "redirect:/bharattrains/user/change-password";
+      }
+
+      service.updatePassword(user, newPassword);
+
+      redirectAttributes.addFlashAttribute(
+          "success", "Password changed successfully!");
+
+      return "redirect:/bharattrains/user/profile";
+    }
+    
 
 //    @GetMapping("/{userId}")
 //    public String getUser(@PathVariable int userId, Model model) {

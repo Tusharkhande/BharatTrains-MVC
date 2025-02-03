@@ -70,4 +70,12 @@ public class UserService {
 		return repository.findByUsername(username);
 	}
 	
+	public boolean checkPassword(Users user, String rawPassword) {
+        return passwordEncoder.matches(rawPassword, user.getPassword());
+    }
+
+    public void updatePassword(Users user, String newPassword) {
+        user.setPassword(passwordEncoder.encode(newPassword));
+        repository.save(user);
+    }
 }
