@@ -29,7 +29,7 @@ public class SeatController {
 
     @PostMapping
 	public ResponseEntity<List<StationToSeatMapping>> addStation(@RequestBody List<AddStation> station) {
-		return seatService.saveStation(station);
+		return seatService.saveMultipleStations(station);
 	}
     
     @GetMapping

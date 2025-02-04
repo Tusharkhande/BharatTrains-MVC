@@ -57,7 +57,7 @@ public class SearchService {
 		
 	}
 	
-	public ResponseEntity<List<Routes>> addRoute(List<Routes> routes){
+	public ResponseEntity<List<Routes>> addMultipleRoutes(List<Routes> routes){
 	    List<Routes> savedRoutes = new ArrayList<>();
 
 		try {
@@ -67,6 +67,15 @@ public class SearchService {
 	        }
 	        return new ResponseEntity<>(savedRoutes, HttpStatus.CREATED);
 		}catch(Exception e) {
+			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+	}
+	
+	public ResponseEntity<Routes> addRoute(Routes route) {
+		try {
+			Routes savedRoute = repository.save(route);
+			return new ResponseEntity<>(savedRoute, HttpStatus.CREATED);
+		} catch (Exception e) {
 			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}

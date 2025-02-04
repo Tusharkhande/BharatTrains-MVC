@@ -106,7 +106,7 @@ public class SeatService {
 		return new ResponseEntity<SeatResponse>(seatResponse, HttpStatus.OK);
 	}
 
-	public ResponseEntity<List<StationToSeatMapping>> saveStation(List<AddStation> stations) {
+	public ResponseEntity<List<StationToSeatMapping>> saveMultipleStations(List<AddStation> stations) {
 		try {
 			List<StationToSeatMapping> savedStations = new ArrayList<>();
 			stations.forEach(station -> {
@@ -122,6 +122,23 @@ public class SeatService {
 			});
 			return new ResponseEntity<>(savedStations,HttpStatus.CREATED);
 		}catch(Exception e) {
+			log.error(e.getMessage());
+			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+	}
+	
+	public ResponseEntity<StationToSeatMapping> saveStation(AddStation station) {
+		try {
+			Train train = trainRepository.findById(station.getTrainId())
+					.orElseThrow(() -> new RuntimeException("Train not found with ID: " + station.getTrainId()));
+			StationToSeatMapping mapping = new StationToSeatMapping();
+			mapping.setTrain(train);
+			mapping.setStation(station.getStation());
+			mapping.setSeats(station.getSeats());
+			mapping.setJourneyDate(station.getJourneyDate());
+			seatRepository.save(mapping);
+			return new ResponseEntity<>(mapping, HttpStatus.CREATED);
+		} catch (Exception e) {
 			log.error(e.getMessage());
 			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 		}

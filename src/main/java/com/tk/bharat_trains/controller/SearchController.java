@@ -29,8 +29,8 @@ public class SearchController {
 	}
 	
 	@PostMapping("/routes")
-	public ResponseEntity<List<Routes>> addRoute(@RequestBody List<Routes> routes){
-		return searchService.addRoute(routes);
+	public ResponseEntity<List<Routes>> addMultipleRoutes(@RequestBody List<Routes> routes){
+		return searchService.addMultipleRoutes(routes);
 	}
 	
 }

@@ -50,7 +50,7 @@ public class AuthController {
     @PostMapping("/register")
     public String registerUser(@ModelAttribute Users user, RedirectAttributes redirectAttributes) {
         System.out.println(user);
-//        service.saveUser(user);
+        service.saveUser(user);
         redirectAttributes.addFlashAttribute("success", "User registered successfully!");
         return "redirect:/bharattrains/auth/login";
     }
