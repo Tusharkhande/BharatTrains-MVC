@@ -23,7 +23,7 @@ body, html {
 </head>
 <body class=" d-flex justify-content-between flex-column" style="background-color: #e3efef;">
 	<nav th:replace="fragments :: navbar"></nav>
-	<div class="{stylesheet} ? 'content-wrapper' : 'container pt-4  content-wrapper'" style="background-color: #e3efef;">
+	<div class="{pageName}=='home' ? 'content-wrapper py-4' : 'container pt-4  content-wrapper'" style="background-color: #e3efef;">
 		<!-- <th:block th:insert="${content}"></th:block>-->
 		<th:block th:if="${content != null}">
 			<th:block th:insert="${content}"></th:block>

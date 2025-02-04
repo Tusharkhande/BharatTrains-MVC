@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
-th:replace="base::layout(~{::div})">
+	th:replace="~{base::layout(~{::div}, '')}">
 
 <head>
     <meta charset="UTF-8">
@@ -11,32 +11,7 @@ th:replace="base::layout(~{::div})">
 
 <body>
     <div class="container-fluid">
-        <!-- 
-        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-            <a class="navbar-brand" href="#">Admin Dashboard</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ms-auto">
-                    <li class="nav-item">
-                        <a class="nav-link" href="/">Home</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/admin/manage-trains">Manage Trains</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/admin/manage-users">Manage Users</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link text-danger" href="/bharattrains/auth/logout">Logout</a>
-                    </li>
-                </ul>
-            </div>
-        </nav>-->
 
-        <!-- Main Dashboard -->
         <div class="container mt-4">
             <!-- Row 1: Dashboard Stats -->
             <div class="row text-center">
@@ -81,7 +56,7 @@ th:replace="base::layout(~{::div})">
                         <div class="card-body">
                             <h5 class="card-title">Manage Trains</h5>
                             <p class="card-text">Add, edit, and remove train details and routes.</p>
-                            <a href="/admin/manage-trains" class="btn btn-primary">Go to Train Management</a>
+                            <a href="/bharattrains/admin/manage-trains" class="btn btn-primary">Go to Train Management</a>
                         </div>
                     </div>
                 </div>
@@ -90,7 +65,7 @@ th:replace="base::layout(~{::div})">
                         <div class="card-body">
                             <h5 class="card-title">Manage Users</h5>
                             <p class="card-text">View and manage user accounts and bookings.</p>
-                            <a href="/admin/manage-users" class="btn btn-primary">Go to User Management</a>
+                            <a href="/bharattrains/admin/users" class="btn btn-primary">Go to User Management</a>
                         </div>
                     </div>
                 </div>
