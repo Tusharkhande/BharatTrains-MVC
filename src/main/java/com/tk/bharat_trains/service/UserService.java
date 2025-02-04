@@ -11,7 +11,10 @@ import org.springframework.stereotype.Service;
 import com.tk.bharat_trains.model.Users;
 import com.tk.bharat_trains.repository.UserRepository;
 
+import lombok.extern.slf4j.Slf4j;
+
 @Service
+@Slf4j
 public class UserService {
 	@Autowired
 	UserRepository repository;
@@ -30,13 +33,8 @@ public class UserService {
 		}
 	}
 	
-	public ResponseEntity<Users> deleteUser(int userId) {
-		Users user = repository.findByUserId(userId);
-		if(user == null) {
-			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-		}else {
-			return new ResponseEntity<>(user, HttpStatus.OK);
-		}
+	public void deleteUser(int id) {
+		repository.deleteById(id);
 	}
 	
 	public Users getUserById(int id) {

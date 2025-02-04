@@ -28,7 +28,7 @@ public class AdminViewController {
 		return "admin/manage-users";
 	}
 	
-	@PostMapping("/deleteUser")
+	@PostMapping("/deleteUser")	
 	public String deleteUser(@RequestParam("userId") int userId) {
 		userService.deleteUser(userId);
 		return "redirect:/bharattrains/admin/users";
