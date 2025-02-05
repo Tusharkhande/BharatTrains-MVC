@@ -37,6 +37,6 @@ public class TrainRequest {
 	private String formatTime(String time, DateTimeFormatter input, DateTimeFormatter output) {
 		if (time == null || time.isEmpty())
 			return time; // Avoid NullPointerException
-		return LocalTime.parse(time, input).format(output);
+		return LocalTime.parse(time, input).format(output).toUpperCase();
 	}
 }

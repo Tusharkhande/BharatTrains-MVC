@@ -60,11 +60,15 @@ public class BookingViewController {
 		System.out.println(searchResponse);
 		Users user = userService.getUserByUsername(principal.getName());
 		System.out.println(user);
-//		bookingService.bookTicket(searchResponse, user.getUserId());
 		Booking booking = bookingService.bookTicket(searchResponse, user.getUserId()).getBody();
-		redirectAttributes.addFlashAttribute("booking", booking);
+		if(booking != null) {
+			redirectAttributes.addFlashAttribute("booking", booking);
+			return "redirect:/bharattrains/booking-successful";			
+		}else {
+			redirectAttributes.addFlashAttribute("error", "Sorry no seat available for the selected date try another train or date...");
+			return "redirect:/bharattrains/book";
+		}
 		
-		return "redirect:/bharattrains/booking-successful";
 	}
 	
 	@GetMapping("/booking-successful")
