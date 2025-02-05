@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -14,6 +15,8 @@ import com.tk.bharat_trains.service.SearchService;
 import com.tk.bharat_trains.service.SeatService;
 import com.tk.bharat_trains.service.TrainService;
 import com.tk.bharat_trains.service.UserService;
+
+import jakarta.transaction.Transactional;
 
 @Controller
 @RequestMapping("/bharattrains/admin")
@@ -53,11 +56,13 @@ public class AdminViewController {
 		return "redirect:/bharattrains/admin/users";
 	}
 	
-	@PostMapping("deleteTrain")
-	public String deleteTrain(@RequestParam("trainId") String trainId) {
-		trainService.deleteTrain(trainId);
+	@PostMapping("/deleteTrain/{trainId}")
+	@Transactional
+	public String deleteTrain(@PathVariable("trainId") String trainId) {
+		System.out.println(trainId);
 		seatService.deleteSeatMappingsByTrainId(trainId);
 		searchService.deleteRoutesByTrainId(trainId);
+		trainService.deleteTrain(trainId);
 		return "redirect:/bharattrains/admin/dashboard";
 	}
 }

@@ -196,6 +196,7 @@ public class SeatService {
 
 	public void deleteSeatMappingsByTrainId(String trainId) {
 		List<StationToSeatMapping> seatMappings = seatRepository.findAllByTrainTrainId(trainId);
+		System.out.println(seatMappings);
 		seatRepository.deleteAll(seatMappings);
 	}
 

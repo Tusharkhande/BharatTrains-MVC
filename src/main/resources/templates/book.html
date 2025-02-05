@@ -27,7 +27,7 @@
 						</select>
 					</div>
 					<div class="col-md-2 mb-2">
-						<input type="date" th:field="*{journeyDate}" th:value="${#temporals.format(searchRequest.journeyDate, 'yyyy-MM-dd')}" class="form-control" required />
+						<input type="date" th:field="*{journeyDate}" th:value="${#temporals.format(searchRequest.journeyDate, 'dd MMM yyyy')}" class="form-control" required />
 					</div>
 					<div class="col-md-2 text-end">
 						<button type="submit" class="btn btn-primary btn-sm">Search

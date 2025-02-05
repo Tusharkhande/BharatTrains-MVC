@@ -55,7 +55,7 @@ public class TrainViewController {
 		return "all-trains";
 	}
 
-	@GetMapping("/admin/add-train")
+	@GetMapping("/admin/addTrain")
 	public String showTrainForm(Model model) {
 		model.addAttribute("trainRequest", new TrainRequest());
 		return "add-train";

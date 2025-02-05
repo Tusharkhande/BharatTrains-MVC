@@ -111,7 +111,9 @@ public class SearchService {
 	}
 
 	public void deleteRoutesByTrainId(String trainId) {
-		repository.findByTrainId(trainId);
+		List<Routes> routes = repository.findByTrainId(trainId);
+		System.out.println(routes);
+		repository.deleteAll(routes);
 	}
 	
 }
