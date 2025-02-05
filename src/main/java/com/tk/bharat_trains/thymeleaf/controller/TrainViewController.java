@@ -75,6 +75,6 @@ public class TrainViewController {
 			addStation.setTrainId(train.getTrainId());
 			seatService.saveStation(addStation);
 		}
-		return "redirect:/bharattrains/trains";
+		return "redirect:/bharattrains/admin/trains";
 	}
 }

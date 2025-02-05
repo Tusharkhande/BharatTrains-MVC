@@ -9,6 +9,10 @@
 </head>
 <body>
 	<div class="container-fluid pt-2">
+        <div th:if="${error}" class="alert alert-danger alert-dismissible fade show" role="alert">
+        	<span th:text="${error}"></span>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
 		<!-- Display the search summary -->
 		<div class="container-fluid bg-secondary p-4 rounded">
 			<form th:action="@{/bharattrains/search}"

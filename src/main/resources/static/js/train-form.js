@@ -1,113 +1,98 @@
 document.addEventListener("DOMContentLoaded", function() {
 
-	function addRouteRow() {
+  function addRouteRow() {
 
-		let routeContainer = document.getElementById("routeContainer");
+    let routeContainer = document.getElementById("routeContainer");
 
-		let index = routeContainer.querySelectorAll('.route-row').length;
+    let index = routeContainer.querySelectorAll('.route-row').length;
 
+    let newRow = `
 
+      <div class="route-row row mb-2">
 
-		let newRow = `
+        <div class="col-md-3">
 
-            <div class="route-row row mb-2">
+          <input type="text" class="form-control" name="routes[${index}].station" placeholder="Station Name" required>
 
-                <div class="col-md-3">
+        </div>
 
-                    <input type="text" class="form-control" name="routes[${index}].station" placeholder="Station Name" required>
+        <div class="col-md-2">
 
-                </div>
+          <input type="time" class="form-control" name="routes[${index}].arrivalTime" required>
 
-                <div class="col-md-3">
+        </div>
 
-                    <input type="time" class="form-control" name="routes[${index}].arrivalTime" required>
+        <div class="col-md-2">
 
-                </div>
+          <input type="time" class="form-control" name="routes[${index}].departureTime" required>
 
-                <div class="col-md-3">
+        </div>
 
-                    <input type="time" class="form-control" name="routes[${index}].departureTime" required>
+        <div class="col-md-2">
 
-                </div>
-				
-				<div class="col-md-3">
+          <input type="date" class="form-control" name="routes[${index}].journeyDate" required>
 
-				                    <input type="date" class="form-control" name="routes[${index}].journeyDate" required>
+        </div>
 
-				                </div>
+        <div class="col-md-2">
 
-                <div class="col-md-3">
+          <button type="button" class="btn btn-sm btn-danger" onclick="removeRow(this)">✖</button>
 
-                    <button type="button" class="btn btn-sm btn-danger" onclick="removeRow(this)">✖</button>
+        </div>
 
-                </div>
+      </div>`;
 
-            </div>`;
+    routeContainer.insertAdjacentHTML("beforeend", newRow);
 
-		routeContainer.insertAdjacentHTML("beforeend", newRow);
+  }
 
-	}
+  function addSeatMappingRow() {
 
+    let seatContainer = document.getElementById("seatContainer");
 
+    let index = seatContainer.querySelectorAll('.seat-row').length;
 
-	function addSeatMappingRow() {
+    let newRow = `
 
-		let seatContainer = document.getElementById("seatContainer");
+      <div class="seat-row row mb-2">
 
-		let index = seatContainer.querySelectorAll('.seat-row').length;
+        <div class="col-md-4">
 
+          <input type="text" class="form-control" name="seatMappings[${index}].station" placeholder="Station Name" required>
 
+        </div>
 
-		let newRow = `
+        <div class="col-md-4">
 
-            <div class="seat-row row mb-2">
+          <input type="date" class="form-control" name="seatMappings[${index}].journeyDate" required>
 
-                <div class="col-md-3">
+        </div>
 
-                    <input type="text" class="form-control" name="seatMappings[${index}].station" placeholder="Station Name" required>
+        <div class="col-md-4">
 
-                </div>
+          <button type="button" class="btn btn-sm btn-danger" onclick="removeRow(this)">✖</button>
 
-                <div class="col-md-3">
+        </div>
 
-                    <input type="date" class="form-control" name="seatMappings[${index}].journeyDate" required>
+      </div>`;
 
-                </div>
+    seatContainer.insertAdjacentHTML("beforeend", newRow);
 
-                <div class="col-md-3">
+  }
 
-                    <input type="text" class="form-control" name="seatMappings[${index}].seats" placeholder="Seats (comma-separated)" required>
+  function removeRow(button) {
 
-                </div>
+    button.parentElement.parentElement.remove();
 
-                <div class="col-md-3">
+  }
 
-                    <button type="button" class="btn btn-sm btn-danger" onclick="removeRow(this)">✖</button>
+  // Make functions globally accessible
 
-                </div>
+  window.addRouteRow = addRouteRow;
 
-            </div>`;
+  window.addSeatMappingRow = addSeatMappingRow;
 
-		seatContainer.insertAdjacentHTML("beforeend", newRow);
-
-	}
-
-
-
-	function removeRow(button) {
-
-		button.parentElement.parentElement.remove();
-
-	}
-
-
-
-	// Make functions globally accessible
-
-	window.addRouteRow = addRouteRow;
-
-	window.addSeatMappingRow = addSeatMappingRow;
-
-	window.removeRow = removeRow;
+  window.removeRow = removeRow;
 
 });
+
