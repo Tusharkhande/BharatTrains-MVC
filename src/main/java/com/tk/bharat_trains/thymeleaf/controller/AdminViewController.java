@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.tk.bharat_trains.service.BookingService;
 import com.tk.bharat_trains.service.SearchService;
@@ -46,8 +47,9 @@ public class AdminViewController {
 	}
 	
 	@PostMapping("/deleteUser")	
-	public String deleteUser(@RequestParam("userId") int userId) {
+	public String deleteUser(@RequestParam("userId") int userId, RedirectAttributes redirectAttributes) {
 		userService.deleteUser(userId);
+		redirectAttributes.addFlashAttribute("success", "User Deletion successful!");
 		return "redirect:/bharattrains/admin/users";
 	}
 	

@@ -83,9 +83,9 @@ public class BookingViewController {
 	}
 	
 	@PostMapping("/cancelBooking")
-	public String cancelBooking(@RequestParam() int bookingId, RedirectAttributes model) {
+	public String cancelBooking(@RequestParam("bookingId") int bookingId, RedirectAttributes model) {
 		bookingService.cancelTicket(bookingId);
 		model.addFlashAttribute("success", "Booking Cancelled Successfully!");
-		return "redirect:/bookings";
+		return "redirect:bharattrains/user/bookings";
 	}
 }

@@ -47,12 +47,12 @@
                      </span>
                   </p>
                   <div class="d-flex justify-content-between">
-                     <a th:href="@{/booking-details/{id}(id=${booking.bookingId})}"
+                     <a href="#"
                         class="btn btn-primary btn-sm">
                      View Details
                      </a>
                      <!-- Cancel Booking Button -->
-                     <button class="btn btn-danger btn-sm"
+                     <button class="btn btn-danger btn-sm" th:if="${booking.bookingStatus}=='CONFIRMED'" 
                         data-bs-toggle="modal"
                         th:attr="data-bs-target='#cancelModal' + ${booking.bookingId}">
                      Cancel Booking
@@ -73,7 +73,7 @@
                         <strong th:text="${booking.trainName} + ' (' + ${booking.source} + ' → ' + ${booking.destination} + ')' "></strong>?
                      </div>
                      <div class="modal-footer">
-                        <form th:action="@{/cancelBooking}" method="post">
+                        <form th:action="@{/bharattrains/cancelBooking}" method="post">
 							<input type="hidden" name="bookingId" th:value="${booking.bookingId}" />
                             <button type="submit" class="btn btn-danger">Cancel Booking</button>
                         </form>
