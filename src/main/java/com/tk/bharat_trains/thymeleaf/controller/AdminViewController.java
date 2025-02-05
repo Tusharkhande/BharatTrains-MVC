@@ -8,6 +8,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.tk.bharat_trains.service.BookingService;
+import com.tk.bharat_trains.service.SeatService;
+import com.tk.bharat_trains.service.TrainService;
 import com.tk.bharat_trains.service.UserService;
 
 @Controller
@@ -17,8 +20,18 @@ public class AdminViewController {
 	@Autowired
 	UserService userService;
 	
+	@Autowired
+	BookingService bookingService;
+	
+	@Autowired
+	TrainService trainService;
+	
+	@Autowired
+	SeatService seatService;
+	
 	@GetMapping("/dashboard")
-	public String showAdminDashboard() {
+	public String showAdminDashboard(Model model) {
+		model.addAttribute("bookingList", bookingService.getRecent5Bookings());
 		return "/admin/admin-dashboard";
 	}
 	
@@ -32,5 +45,11 @@ public class AdminViewController {
 	public String deleteUser(@RequestParam("userId") int userId) {
 		userService.deleteUser(userId);
 		return "redirect:/bharattrains/admin/users";
+	}
+	
+	@PostMapping("deleteTrain")
+	public String deleteTrain(@RequestParam("trainId") String trainId) {
+		trainService.deleteTrain(trainId);
+		return "redirect:/bharattrains/admin/dashboard";
 	}
 }

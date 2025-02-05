@@ -194,4 +194,9 @@ public class SeatService {
 		return seatRepository.findAllByTrainTrainId(trainId);
 	}
 
+	public void deleteSeatMappingsByTrainId(String trainId) {
+		List<StationToSeatMapping> seatMappings = seatRepository.findAllByTrainTrainId(trainId);
+		seatRepository.deleteAll(seatMappings);
+	}
+
 }

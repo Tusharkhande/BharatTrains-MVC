@@ -32,4 +32,8 @@ public class TrainService {
 		// TODO Auto-generated method stub
 		return repository.findAll();
 	}
+	
+	public void deleteTrain(String trainId) {
+		repository.deleteById(trainId);
+	}
 }

@@ -64,7 +64,7 @@ public class BookingService {
 			booking.setTrainName(searchResponse.getTrainName());
 			booking.setUserId(userId);
 			bookingRepository.save(booking);
-//			notificationService.sendMail(new EmailRequest("goswaa0@gmail.com", "khandetushar2001@gmail.com", "Hello"));
+			notificationService.sendMail(new EmailRequest("goswaa0@gmail.com", "khandetushar2001@gmail.com", "Hello"));
 			log.info("booking successful!");
 						
 			return new ResponseEntity<>(booking, HttpStatus.CREATED);
@@ -113,6 +113,10 @@ public class BookingService {
 
 	public ResponseEntity<List<Booking>> getBookingByUserId(int userId) {
 		return new ResponseEntity<List<Booking>>(bookingRepository.findByUserId(userId), HttpStatus.OK);
+	}
+	
+	public List<Booking> getRecent5Bookings() {
+		return bookingRepository.findRecentBookings();
 	}
 	
 }

@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
-	th:replace="~{base::layout(~{::div}, '')}">
+	th:replace="~{base::layout(~{::div}, '/css/admin-dashboard.css')}">
 
 <head>
     <meta charset="UTF-8">
@@ -10,104 +10,61 @@
 </head>
 
 <body>
-    <div class="container-fluid">
 
-        <div class="container mt-4">
-            <!-- Row 1: Dashboard Stats -->
-            <div class="row text-center">
-                <div class="col-md-3">
-                    <div class="card text-white bg-primary mb-3">
-                        <div class="card-body">
-                            <h5 class="card-title">Total Trains</h5>
-                            <p class="card-text" th:text="${totalTrains}"></p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-3">
-                    <div class="card text-white bg-success mb-3">
-                        <div class="card-body">
-                            <h5 class="card-title">Total Bookings</h5>
-                            <p class="card-text" th:text="${totalBookings}"></p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-3">
-                    <div class="card text-white bg-warning mb-3">
-                        <div class="card-body">
-                            <h5 class="card-title">Revenue</h5>
-                            <p class="card-text">₹<span th:text="${totalRevenue}"></span></p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-3">
-                    <div class="card text-white bg-danger mb-3">
-                        <div class="card-body">
-                            <h5 class="card-title">Pending Complaints</h5>
-                            <p class="card-text" th:text="${pendingComplaints}"></p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Row 2: Manage Options -->
-            <div class="row mt-4">
-                <div class="col-md-4">
-                    <div class="card">
-                        <div class="card-body">
-                            <h5 class="card-title">Manage Trains</h5>
-                            <p class="card-text">Add, edit, and remove train details and routes.</p>
-                            <a href="/bharattrains/admin/manage-trains" class="btn btn-primary">Go to Train Management</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="card">
-                        <div class="card-body">
-                            <h5 class="card-title">Manage Users</h5>
-                            <p class="card-text">View and manage user accounts and bookings.</p>
-                            <a href="/bharattrains/admin/users" class="btn btn-primary">Go to User Management</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="card">
-                        <div class="card-body">
-                            <h5 class="card-title">View Reports</h5>
-                            <p class="card-text">View booking and revenue reports.</p>
-                            <a href="/admin/reports" class="btn btn-primary">Go to Reports</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Row 3: Recent Bookings -->
-            <div class="mt-5">
-                <h4>Recent Bookings</h4>
-                <table class="table table-bordered">
-                    <thead>
-                        <tr>
-                            <th>Booking ID</th>
-                            <th>Train Name</th>
-                            <th>User Name</th>
-                            <th>Date</th>
-                            <th>Status</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr th:each="booking : ${recentBookings}">
-                            <td th:text="${booking.bookingId}"></td>
-                            <td th:text="${booking.trainName}"></td>
-                            <td th:text="${booking.userName}"></td>
-                            <td th:text="${booking.date}"></td>
-                            <td th:text="${booking.status}"></td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-        </div>
-    </div>
-
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<div class="main-content">
+   <div class="row mt-4">
+      <!-- User Management -->
+      <div class="col-md-4">
+         <a href="/admin/users" class="card text-center shadow-sm dashboard-link">
+            <i class="fas fa-users"></i>
+            <h5>User Management</h5>
+            <p>Manage all registered users</p>
+         </a>
+      </div>
+      <!-- Train Management -->
+      <div class="col-md-4">
+         <a href="/admin/trains" class="card text-center shadow-sm dashboard-link">
+            <i class="fas fa-train"></i>
+            <h5>Train Management</h5>
+            <p>Manage all train details</p>
+         </a>
+      </div>
+      <!-- Revenue Overview -->
+      <div class="col-md-4">
+         <div class="card text-center shadow-sm">
+            <i class="fas fa-wallet"></i>
+            <h5>₹12L</h5>
+            <p>Total Revenue</p>
+         </div>
+      </div>
+   </div>
+   <!-- Recent Bookings -->
+   <div class="row mt-4">
+   <div class="col-md-12">
+      <div class="card p-4 shadow-sm">
+         <h5>Recent Bookings</h5>
+         <ul class="list-group">
+            <li class="list-group-item d-flex justify-content-between align-items-center"
+               th:each="booking : ${bookingList}">
+               <span>
+               <strong th:text="'#' + ${booking.bookingId}"></strong> - 
+               <span th:text="${booking.trainName}"></span> 
+               (<span th:text="${booking.source}"></span> to 
+               <span th:text="${booking.destination}"></span>) - 
+               <span th:text="${booking.journeyDate}"></span>
+               </span>
+               <span class="badge"
+                  th:classappend="${booking.bookingStatus == 'Confirmed' ? 'bg-success' : 
+                  booking.bookingStatus == 'Pending' ? 'bg-warning' : 
+                  'bg-danger'}"
+                  th:text="${booking.bookingStatus}">
+               </span>
+            </li>
+         </ul>
+      </div>
+   </div>
+</div>
+</div>
 </body>
 
 </html>

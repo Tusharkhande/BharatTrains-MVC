@@ -109,5 +109,9 @@ public class SearchService {
 	        return "Invalid Time Format";
 	    }
 	}
+
+	public void deleteRoutesByTrainId(String trainId) {
+		repository.findByTrainId(trainId);
+	}
 	
 }

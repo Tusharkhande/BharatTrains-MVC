@@ -40,6 +40,7 @@ public class SecurityConfig {
 				.sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED))
 				
 				.authorizeHttpRequests(auth -> auth.requestMatchers("/api/train/search**").hasRole("USER")
+						.requestMatchers("/api/notify**").permitAll()
 						.requestMatchers("/api/train/booking/**").hasRole("USER").requestMatchers("/api/train/**")
 						.hasRole("ADMIN")
 //						.requestMatchers("/api/train/search**", "/api/train/booking/**").hasRole("USER")

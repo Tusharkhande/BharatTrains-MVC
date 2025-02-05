@@ -23,4 +23,6 @@ public interface SearchRepository extends JpaRepository<Routes, Integer>{
 	
 	@Query("SELECT distinct R.station FROM Routes R")
     List<String> findAllStations();
+	
+	List<Routes> findByTrainId(String trainId);
 }
