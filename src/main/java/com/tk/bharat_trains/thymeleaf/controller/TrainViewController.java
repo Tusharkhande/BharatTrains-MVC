@@ -26,7 +26,7 @@ import lombok.extern.slf4j.Slf4j;
 
 @Controller
 @Slf4j
-@RequestMapping("/bharattrains/trains")
+@RequestMapping("/bharattrains")
 public class TrainViewController {
 	@Autowired
 	TrainService trainService;
@@ -42,7 +42,7 @@ public class TrainViewController {
 //		return "trains";
 //	}
 
-	@GetMapping
+	@GetMapping("/admin/trains")
 	public String getAllTrainsWithPaths(Model model) {
 		List<Train> trains = trainService.getAllTrains();
 		Map<String, List<String>> trainPaths = trains.stream()
@@ -55,13 +55,13 @@ public class TrainViewController {
 		return "all-trains";
 	}
 
-	@GetMapping("/add-train")
+	@GetMapping("/admin/add-train")
 	public String showTrainForm(Model model) {
 		model.addAttribute("trainRequest", new TrainRequest());
 		return "add-train";
 	}
 
-	@PostMapping("/save-train")
+	@PostMapping("/admin/save-train")
 	public String saveTrain(@ModelAttribute TrainRequest trainRequest) {
 		Train train = new Train(trainRequest.getTrainId(), trainRequest.getTrainName(), trainRequest.getSeatCount());
 		System.out.println(trainRequest);

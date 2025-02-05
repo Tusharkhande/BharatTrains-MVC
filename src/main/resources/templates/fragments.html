@@ -18,7 +18,7 @@
                     <li class="nav-item"><a class="nav-link" href="/bharattrains/about">About</a></li>
                     <li class="nav-item"><a class="nav-link" href="/bharattrains/contact">Contact Us</a></li>
                     <li class="nav-item"><a class="nav-link" href="/bharattrains/search">Search Trains</a></li>
-                    <li class="nav-item"><a class="nav-link" href="/bharattrains/trains">All Trains</a></li>
+                    <li class="nav-item" sec:authorize="hasRole('ADMIN')"><a class="nav-link" href="/bharattrains/admin/trains">All Trains</a></li>
                     <li class="nav-item" sec:authorize="hasRole('ADMIN')"><a class="nav-link" href="/bharattrains/admin/dashboard">Dashboard</a></li>
                 </ul>
                 <ul class="navbar-nav ms-auto">

@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.tk.bharat_trains.service.BookingService;
+import com.tk.bharat_trains.service.SearchService;
 import com.tk.bharat_trains.service.SeatService;
 import com.tk.bharat_trains.service.TrainService;
 import com.tk.bharat_trains.service.UserService;
@@ -28,6 +29,9 @@ public class AdminViewController {
 	
 	@Autowired
 	SeatService seatService;
+	
+	@Autowired
+	SearchService searchService;
 	
 	@GetMapping("/dashboard")
 	public String showAdminDashboard(Model model) {
@@ -50,6 +54,8 @@ public class AdminViewController {
 	@PostMapping("deleteTrain")
 	public String deleteTrain(@RequestParam("trainId") String trainId) {
 		trainService.deleteTrain(trainId);
+		seatService.deleteSeatMappingsByTrainId(trainId);
+		searchService.deleteRoutesByTrainId(trainId);
 		return "redirect:/bharattrains/admin/dashboard";
 	}
 }
