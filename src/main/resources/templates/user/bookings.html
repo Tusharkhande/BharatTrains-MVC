@@ -73,7 +73,7 @@
                         <strong th:text="${booking.trainName} + ' (' + ${booking.source} + ' → ' + ${booking.destination} + ')' "></strong>?
                      </div>
                      <div class="modal-footer">
-                        <form th:action="@{/bharattrains/cancelBooking}" method="post">
+                        <form action="/bharattrains/cancelBooking" method="post">
 							<input type="hidden" name="bookingId" th:value="${booking.bookingId}" />
                             <button type="submit" class="btn btn-danger">Cancel Booking</button>
                         </form>

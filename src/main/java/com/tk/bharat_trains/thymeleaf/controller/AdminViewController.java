@@ -40,6 +40,11 @@ public class AdminViewController {
 	@GetMapping("/dashboard")
 	public String showAdminDashboard(Model model) {
 		model.addAttribute("bookingList", bookingService.getRecent5Bookings());
+		model.addAttribute("totalUsers", userService.getUsers().size());
+		model.addAttribute("totalTrains", trainService.getAllTrains().size());
+		model.addAttribute("totalBookings", bookingService.getAllBookings().size());
+		model.addAttribute("totalRevenue", 12);
+
 		return "/admin/admin-dashboard";
 	}
 	

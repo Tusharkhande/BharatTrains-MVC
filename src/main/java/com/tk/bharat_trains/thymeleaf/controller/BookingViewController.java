@@ -90,6 +90,6 @@ public class BookingViewController {
 	public String cancelBooking(@RequestParam("bookingId") int bookingId, RedirectAttributes model) {
 		bookingService.cancelTicket(bookingId);
 		model.addFlashAttribute("success", "Booking Cancelled Successfully!");
-		return "redirect:bharattrains/user/bookings";
+		return "redirect:/user/bookings";
 	}
 }

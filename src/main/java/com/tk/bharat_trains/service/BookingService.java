@@ -118,5 +118,9 @@ public class BookingService {
 	public List<Booking> getRecent5Bookings() {
 		return bookingRepository.findRecentBookings();
 	}
+
+	public List<Booking> getAllBookings() {
+		return bookingRepository.findAll();
+	}
 	
 }
