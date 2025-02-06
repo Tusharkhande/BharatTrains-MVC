@@ -72,7 +72,7 @@ public class UserViewController {
     	Users user =(Users) session.getAttribute("user");
       if (!service.checkPassword(user, currentPassword)) {
         redirectAttributes.addFlashAttribute( "error", "Incorrect current password!");
-        return "redirect:/bharattrains/user/change-password";
+        return "redirect:/bharattrains/user/profile";
       }
 
       if (!newPassword.equals(confirmPassword)) {

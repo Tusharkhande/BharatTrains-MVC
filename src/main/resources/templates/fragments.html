@@ -6,39 +6,65 @@
 
 </head>	
 <body>
-    <nav th:fragment="navbar" class="navbar navbar-expand-lg navbar-dark bg-dark" style="margin-bottom:0;">
-        <div class="container-fluid">
-            <a class="navbar-brand" href="/bharattrains/home">Bharat Trains</a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav me-auto">
-                    <li class="nav-item"><a class="nav-link" href="/bharattrains/home">Home</a></li>
-                    <li class="nav-item"><a class="nav-link" href="/bharattrains/about">About</a></li>
-                    <li class="nav-item"><a class="nav-link" href="/bharattrains/contact">Contact Us</a></li>
-                    <li class="nav-item"><a class="nav-link" href="/bharattrains/search">Search Trains</a></li>
-                    <li class="nav-item" sec:authorize="hasRole('ADMIN')"><a class="nav-link" href="/bharattrains/admin/trains">All Trains</a></li>
-                    <li class="nav-item" sec:authorize="hasRole('ADMIN')"><a class="nav-link" href="/bharattrains/admin/dashboard">Dashboard</a></li>
-                </ul>
-                <ul class="navbar-nav ms-auto">
-                    <li class="nav-item" sec:authorize="isAnonymous()"><a class="nav-link" href="/bharattrains/auth/login">Login</a></li>
-                    <li class="nav-item" sec:authorize="isAnonymous()"><a class="nav-link" href="/bharattrains/auth/register">Register</a></li>
-                    <!-- User Icon Dropdown -->
-                    <li class="nav-item dropdown" sec:authorize="isAuthenticated()">
-                        <a class="nav-link dropdown-toggle d-flex align-items-center" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            <img th:src="@{/images/user-profile.png}" alt="Profile"class="rounded-circle" width="35" height="35">
-                        </a>
-                        <div class="dropdown-menu dropdown-menu-start" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" href="/bharattrains/user/profile">User Profile</a> <!-- User Profile Link -->
-                            <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="/bharattrains/auth/logout">Logout</a> <!-- Logout Link -->
-                        </div>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </nav>
+    <nav th:fragment="navbar" class="navbar navbar-expand-lg navbar-dark bg-dark mb-0">
+   <div class="container-fluid">
+      <!-- Brand Logo (Left) -->
+      <a class="navbar-brand" href="/bharattrains/home">Bharat Trains</a>
+      <!-- Mobile Toggler -->
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+         aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+      </button>
+      <!-- All Navigation Items (Right) -->
+      <div class="collapse navbar-collapse text-center justify-content-end" id="navbarNav">
+         <ul class="navbar-nav">
+            <!-- Core Links -->
+            <li class="nav-item">
+               <a class="nav-link" href="/bharattrains/home">Home</a>
+            </li>
+            <li class="nav-item">
+               <a class="nav-link" href="/bharattrains/about">About</a>
+            </li>
+            <li class="nav-item">
+               <a class="nav-link" href="/bharattrains/contact">Contact</a>
+            </li>
+            <li class="nav-item">
+               <a class="nav-link" href="/bharattrains/search">Search Trains</a>
+            </li>
+            <!-- Admin Section -->
+            <li class="nav-item" sec:authorize="hasRole('ADMIN')">
+               <a class="nav-link" href="/bharattrains/admin/trains">Manage Trains</a>
+            </li>
+            <li class="nav-item" sec:authorize="hasRole('ADMIN')">
+               <a class="nav-link" href="/bharattrains/admin/dashboard">Dashboard</a>
+            </li>
+            <!-- Auth Section -->
+            <li class="nav-item" sec:authorize="isAnonymous()">
+               <a class="nav-link" href="/bharattrains/auth/login">Login</a>
+            </li>
+            <li class="nav-item" sec:authorize="isAnonymous()">
+               <a class="nav-link" href="/bharattrains/auth/register">Register</a>
+            </li>
+            <!-- User Dropdown -->
+            <li class="nav-item dropdown" sec:authorize="isAuthenticated()">
+               <a class="nav-link dropdown-toggle d-flex align-items-center" href="#"
+                  id="userDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+               <img th:src="@{/images/user-profile.png}" alt="Profile"
+                  class="rounded-circle me-2" width="35" height="35">
+               Profile
+               </a>
+               <ul class="dropdown-menu dropdown-menu-end">
+                  <li><a class="dropdown-item" href="/bharattrains/user/profile">My Profile</a></li>
+                  <li>
+                     <hr class="dropdown-divider">
+                  </li>
+                  <li><a class="dropdown-item" href="/bharattrains/auth/logout">Logout</a></li>
+               </ul>
+            </li>
+         </ul>
+      </div>
+   </div>
+</nav>
 	        
 	<footer th:fragment="footer" class=" text-center " style="background: #141459; color: white; padding: 30px 0;" >
 	   <p>&copy; 2025 Bharat Trains. All rights reserved.</p>

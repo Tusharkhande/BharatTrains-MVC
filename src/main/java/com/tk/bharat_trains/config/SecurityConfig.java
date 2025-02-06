@@ -37,7 +37,7 @@ public class SecurityConfig {
 	@Bean
 	public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 		return http.csrf().disable()
-				.httpBasic().and()
+//				.httpBasic().and()
 				.sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED))
 				
 				.authorizeHttpRequests(auth -> auth.requestMatchers("/api/train/search**").hasRole("USER")
