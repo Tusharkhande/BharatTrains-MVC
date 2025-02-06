@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 import com.tk.bharat_trains.dto.requests.AddStation;
 import com.tk.bharat_trains.dto.requests.BookingRequest;
 import com.tk.bharat_trains.dto.requests.CancelRequest;
+import com.tk.bharat_trains.dto.requests.SearchRequest;
 import com.tk.bharat_trains.dto.response.SeatResponse;
 import com.tk.bharat_trains.model.StationToSeatMapping;
 import com.tk.bharat_trains.model.Train;
@@ -31,7 +32,41 @@ public class SeatService {
 	@Autowired
 	TrainRepository trainRepository;
 	
-	public ResponseEntity<SeatResponse> isSeatAvailable(BookingRequest bookingRequest) {
+	public int availableSeats(SearchRequest searchRequest, String trainId) {
+		
+		List<StationToSeatMapping> route = seatRepository.findAllByTrainTrainId(trainId, searchRequest.getJourneyDate());
+		
+		Train train = trainRepository.findByTrainId(trainId);
+		
+		if(train==null || route.isEmpty()) {
+			return 0;
+		}
+		
+		int totalSeats = train.getSeatCount();
+		
+		log.info("Total Seats: "+totalSeats);
+		
+		Set<Integer> unavailableSeats = new HashSet<>();
+		
+		boolean track = false;
+		
+		for(StationToSeatMapping station : route) {
+			if(station.getStation().equals(searchRequest.getSource())) {
+				track = true;
+			}else if(station.getStation().equals(searchRequest.getDestination())) {
+				break;
+			}
+			if(track) {
+				log.info("track " + track);
+				unavailableSeats.addAll(station.getSeats());
+			}
+		}
+		log.info("Available Seats " + (totalSeats - unavailableSeats.size()));
+		return totalSeats - unavailableSeats.size();
+		
+	}
+	
+	public ResponseEntity<SeatResponse> checkSeatAvailabilityAndUpdate(BookingRequest bookingRequest) {
 		SeatResponse seatResponse = new SeatResponse();
 		
 		List<StationToSeatMapping> route = seatRepository.findAllByTrainTrainId(bookingRequest.getTrainId(), bookingRequest.getJourneyDate());

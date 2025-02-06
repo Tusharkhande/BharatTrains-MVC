@@ -20,7 +20,7 @@ public interface SeatRepository extends JpaRepository<StationToSeatMapping, Inte
 	
     List<StationToSeatMapping> findAllByTrainTrainId(String trainId);
     
-    @Query("SELECT s FROM StationToSeatMapping s WHERE s.train.trainId = :trainId AND s.journeyDate = :journeyDate")
+    @Query("SELECT s FROM StationToSeatMapping s WHERE s.train.trainId = :trainId AND s.journeyDate = :journeyDate ORDER BY s.id")
     List<StationToSeatMapping> findAllByTrainTrainId(@Param("trainId") String trainId, @Param("journeyDate") LocalDate journeyDate);
 
 }

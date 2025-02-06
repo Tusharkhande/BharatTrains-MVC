@@ -24,4 +24,5 @@ public class SearchResponse {
 //    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate journeyDate;
     private String travelTime;
+    private int availableSeats;
 }

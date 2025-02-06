@@ -49,7 +49,7 @@ public class UserViewController {
     public String updateProfile(@ModelAttribute Users user, RedirectAttributes redirectAttributes, HttpSession session) {
     	Users loggedUser = (Users)session.getAttribute("user");
     	try {
-            service.updateUser(0, user);
+            service.updateUser(loggedUser.getUserId(), user);
             redirectAttributes.addFlashAttribute("success", "Profile updated successfully!");
     	}
     	catch(Exception e) {

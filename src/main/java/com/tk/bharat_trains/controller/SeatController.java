@@ -23,7 +23,7 @@ public class SeatController {
 
     @PostMapping("/available")
     public ResponseEntity<SeatResponse> isSeatAvailable(@RequestBody BookingRequest bookingRequest) {
-        return seatService.isSeatAvailable(bookingRequest);
+        return seatService.checkSeatAvailabilityAndUpdate(bookingRequest);
     }
     
 

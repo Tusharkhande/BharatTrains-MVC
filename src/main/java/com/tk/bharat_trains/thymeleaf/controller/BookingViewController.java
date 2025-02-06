@@ -74,8 +74,12 @@ public class BookingViewController {
 	@GetMapping("/booking-successful")
 	public String bookingSuccessful(RedirectAttributes redirectAttributes, Model model) {
 		Booking booking = (Booking) model.asMap().get("booking");
-		model.addAttribute(booking);
-		return "booking-successful";
+//		model.addAttribute(booking);
+		if(booking !=null) {
+			return "booking-successful";
+		}else{
+			return "redirect:/bharattrains/book";
+		}
 	}
 	
 	@GetMapping("/user/bookings")
@@ -90,6 +94,6 @@ public class BookingViewController {
 	public String cancelBooking(@RequestParam("bookingId") int bookingId, RedirectAttributes model) {
 		bookingService.cancelTicket(bookingId);
 		model.addFlashAttribute("success", "Booking Cancelled Successfully!");
-		return "redirect:/user/bookings";
+		return "redirect:/bharattrains/user/bookings";
 	}
 }

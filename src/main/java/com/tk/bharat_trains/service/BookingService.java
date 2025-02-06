@@ -48,7 +48,7 @@ public class BookingService {
 //        			.toEntity(SeatResponse.class)
 //        			.block();
 
-		ResponseEntity<SeatResponse> seatResponse = seatService.isSeatAvailable(bookingRequest);
+		ResponseEntity<SeatResponse> seatResponse = seatService.checkSeatAvailabilityAndUpdate(bookingRequest);
 		
 		log.info("Seatresponse seatstatus... "+seatResponse.getBody().isAvailable());
 		

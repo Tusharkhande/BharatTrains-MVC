@@ -1,177 +1,117 @@
-<html xmlns:th="http://www.thymeleaf.org"
-	th:replace="~{base::layout(~{::div}, '')}">
-<head>
-<title>Search Results</title>
-<!-- Add Bootstrap CSS -->
-<link
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
-	rel="stylesheet">
-</head>
-<body>
-	<div class="container-fluid pt-2">
-        <div th:if="${error}" class="alert alert-danger alert-dismissible fade show" role="alert">
-        	<span th:text="${error}"></span>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{base::layout(~{::div}, '')}">
+   <head>
+      <title>Search Results</title>
+      <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+   </head>
+   <body>
+      <div class="container-fluid pt-2">
+         <div th:if="${error}" class="alert alert-danger alert-dismissible fade show" role="alert">
+            <span th:text="${error}"></span>
             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-        </div>
-		<!-- Display the search summary -->
-		<div class="container-fluid bg-secondary p-4 rounded">
-			<form th:action="@{/bharattrains/search}"
-				th:object="${searchRequest}" method="post">
-				<div class="row">
-					<div class="col-md-4 mb-2">
-						<select th:field="*{source}" class="form-select">
-							<option th:each="station : ${stationList}" th:value="${station}"
-								th:text="${station}"></option>
-						</select>
-					</div>
-					<div class="col-md-4 mb-2">
-						<select th:field="*{destination}" class="form-select">
-							<option th:each="station : ${stationList}" th:value="${station}"
-								th:text="${station}"></option>
-						</select>
-					</div>
-					<div class="col-md-2 mb-2">
-						<input type="date" th:field="*{journeyDate}" th:value="${#temporals.format(searchRequest.journeyDate, 'dd MMM yyyy')}" class="form-control" required />
-					</div>
-					<div class="col-md-2 text-end">
-						<button type="submit" class="btn btn-primary btn-sm">Search
-							Trains</button>
-					</div>
-				</div>
-			</form>
-		</div>
-		<p
-			th:if="${searchResponse != null  and not #lists.isEmpty(searchResponse)}"
-			style="border: 1px solid; padding: 5px; margin-top: 5px;">
-			<strong th:text="${searchResponse.size()}"></strong> Results Found
-			for <strong th:text="${source}"></strong> to <strong
-				th:text="${destination}"></strong> on <strong
-				th:text="${journeyDate}"></strong>
-		</p>
-
-		<div class="row">
-			<!-- Iterate through searchResponse and display train details -->
-			<div
-				th:if="${searchResponse != null and not #lists.isEmpty(searchResponse)}"
-				th:each="train : ${searchResponse}" class="col-md-6 mt-2">
-				<div class="card">
-					<div class="card-header bg-secondary text-white">
-						<span th:text="${train.trainName}"></span> (<span
-							th:text="${train.trainId}"></span>)
-					</div>
-					<div class="card-body">
-						<div class="row pb-2">
-							<!-- Departure Details -->
-							<div class="col-5">
-								<strong th:text="${train.departureTime}"></strong> | <strong
-									th:text="${train.source}"></strong> | <strong
-									th:text="${train.journeyDate}"></strong>
-							</div>
-
-							<div class="col-2 text-center">
-								<span th:text="${train.travelTime}"></span>
-							</div>
-
-							<div class="col-5 text-end">
-								<strong th:text="${train.arrivalTime}"></strong> | <strong
-									th:text="${train.destination}"></strong>
-							</div>
-						</div>
-
-						<div class="d-flex justify-content-between">
-							<button class="btn btn-success btn-sm" type="button"
-								data-bs-toggle="modal" data-bs-target="#bookModal"
-								th:attr="data-train-id=${train.trainId}, data-train-name=${train.trainName}, data-source=${train.source}, data-destination=${train.destination}, data-departure=${train.departureTime}, data-arrival=${train.arrivalTime}, data-journey-date=${train.journeyDate}, data-travel-time=${train.travelTime}">
-								Book Now</button>
-							<button class="btn btn-secondary btn-sm" type="button">Check
-								Availability</button>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-
-	<!-- Modal Structure
-	<div class="modal fade" tabindex="-1" role="dialog"
-		aria-labelledby="bookModalLabel" aria-hidden="true">
-		<div class="modal-dialog" role="document">
-			<div class="modal-content">
-				<div class="modal-header">
-					<h5 class="modal-title" id="bookModalLabel">Book Train</h5>
-					<button type="button" class="close" data-dismiss="modal"
-						aria-label="Close">
-						<span aria-hidden="true">&times;</span>
-					</button>
-				</div>
-				<div class="modal-body">
-					<p>
-						Booking details for <strong></strong> go here...
-					</p>
-				</div>
-				<div class="modal-footer">
-					<button type="button" class="btn btn-secondary"
-						data-dismiss="modal">Close</button>
-					<button type="button" class="btn btn-primary">Confirm
-						Booking</button>
-				</div>
-			</div>
-		</div>
-	</div> 
-	-->
-
-	<div class="modal fade" id="bookModal" tabindex="-1" role="dialog"
-		aria-labelledby="bookModalLabel" aria-hidden="true">
-		<div class="modal-dialog" role="document">
-			<div class="modal-content">
-				<div class="modal-header">
-					<h5 class="modal-title" id="bookModalLabel">Book Train</h5>
-					<button type="button" class="btn-close" data-bs-dismiss="modal"
-						aria-label="Close">
-					</button>
-				</div>
-				<div class="modal-body">
-					<form id="bookForm" th:action="@{/bharattrains/book}" method="post">
-						<input type="hidden" name="trainId" id="modalTrainId"> <input
-							type="hidden" name="trainName" id="modalTrainName"> <input
-							type="hidden" name="source" id="modalSource"> <input
-							type="hidden" name="destination" id="modalDestination"> <input
-							type="hidden" name="departureTime" id="modalDeparture"> <input
-							type="hidden" name="arrivalTime" id="modalArrival"> <input
-							type="hidden" name="journeyDate" id="modalJourneyDate"> <input
-							type="hidden" name="travelTime" id="modalTravelTime">
-						<p>
-							<strong>Train Name:</strong> <span id="displayTrainName"></span>
-						</p>
-						<p>
-							<strong>Source:</strong> <span id="displaySource"></span>
-						</p>
-						<p>
-							<strong>Destination:</strong> <span id="displayDestination"></span>
-						</p>
-						<p>
-							<strong>Departure:</strong> <span id="displayDeparture"></span>
-						</p>
-						<p>
-							<strong>Arrival:</strong> <span id="displayArrival"></span>
-						</p>
-						<p>
-							<strong>Journey Date:</strong> <span id="displayJourneyDate"></span>
-						</p>
-						<p>
-							<strong>Travel Time:</strong> <span id="displayTravelTime"></span>
-						</p>
-					</form>
-				</div>
-				<div class="modal-footer">
-					<button type="button" class="btn btn-secondary"
-						data-bs-dismiss="modal">Close</button>
-					<button type="submit" class="btn btn-primary" form="bookForm">Confirm
-						Booking</button>
-				</div>
-			</div>
-		</div>
-	</div>
-
-</body>
+         </div>
+         <!-- Search Form -->
+         <div class="container-fluid bg-secondary p-4 rounded">
+            <form th:action="@{/bharattrains/search}" th:object="${searchRequest}" method="post">
+               <div class="row">
+                  <div class="col-md-4 mb-2">
+                     <select th:field="*{source}" class="form-select">
+                        <option th:each="station : ${stationList}" th:value="${station}" th:text="${station}"></option>
+                     </select>
+                  </div>
+                  <div class="col-md-4 mb-2">
+                     <select th:field="*{destination}" class="form-select">
+                        <option th:each="station : ${stationList}" th:value="${station}" th:text="${station}"></option>
+                     </select>
+                  </div>
+                  <div class="col-md-2 mb-2">
+                     <input type="date" th:field="*{journeyDate}" class="form-control" required />
+                  </div>
+                  <div class="col-md-2 text-end">
+                     <button type="submit" class="btn btn-primary btn-sm">Search Trains</button>
+                  </div>
+               </div>
+            </form>
+         </div>
+         <!-- Search Results -->
+         <p th:if="${searchResponse != null and not #lists.isEmpty(searchResponse)}" class="border p-2 mt-2">
+            <strong th:text="${searchResponse.size()}"></strong> Results Found for
+            <strong th:text="${source}"></strong> to <strong th:text="${destination}"></strong> on
+            <strong th:text="${journeyDate}"></strong>
+         </p>
+         <div class="row">
+            <!-- Iterate through search results -->
+            <div th:each="train, iterStat : ${searchResponse}" class="col-md-6 mt-2">
+               <div class="card">
+                  <div class="card-header bg-secondary text-white">
+                     <span th:text="${train.trainName}"></span> (<span th:text="${train.trainId}"></span>)
+                  </div>
+                  <div class="card-body">
+                     <div class="row pb-2">
+                        <div class="col-5">
+                           <strong th:text="${train.departureTime}"></strong> |
+                           <strong th:text="${train.source}"></strong> |
+                           <strong th:text="${train.journeyDate}"></strong>
+                        </div>
+                        <div class="col-2 text-center">
+                           <span th:text="${train.travelTime}"></span>
+                        </div>
+                        <div class="col-5 text-end">
+                           <strong th:text="${train.arrivalTime}"></strong> |
+                           <strong th:text="${train.destination}"></strong>
+                        </div>
+                     </div>
+                     <div class="d-flex justify-content-between">
+                        <span class="text-success"><strong>Seats Available: </strong> <span th:text="${train.availableSeats}"></span></span>
+                        <!-- Book Now button opens its respective modal -->
+                        <button class="btn btn-success btn-sm" type="button"
+                           data-bs-toggle="modal" th:attr="data-bs-target='#bookModal-' + ${iterStat.index}">
+                        Book Now
+                        </button>
+                     </div>
+                  </div>
+               </div>
+               <!-- Individual Modal for each train -->
+               <div class="modal fade" th:id="'bookModal-' + ${iterStat.index}" tabindex="-1" role="dialog"
+                  aria-labelledby="bookModalLabel" aria-hidden="true">
+                  <div class="modal-dialog" role="document">
+                     <div class="modal-content">
+                        <div class="modal-header">
+                           <h5 class="modal-title">Book Train</h5>
+                           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                           <form th:action="@{/bharattrains/book}" method="post">
+                              <input type="hidden" name="trainId" th:value="${train.trainId}">
+                              <input type="hidden" name="trainName" th:value="${train.trainName}">
+                              <input type="hidden" name="source" th:value="${train.source}">
+                              <input type="hidden" name="destination" th:value="${train.destination}">
+                              <input type="hidden" name="departureTime" th:value="${train.departureTime}">
+                              <input type="hidden" name="arrivalTime" th:value="${train.arrivalTime}">
+                              <input type="hidden" name="journeyDate" th:value="${train.journeyDate}">
+                              <input type="hidden" name="travelTime" th:value="${train.travelTime}">
+                              <input type="hidden" name="availableSeats" th:value="${train.availableSeats}">
+                              <p><strong>Train Name:</strong> <span th:text="${train.trainName}"></span></p>
+                              <p><strong>Source:</strong> <span th:text="${train.source}"></span></p>
+                              <p><strong>Destination:</strong> <span th:text="${train.destination}"></span></p>
+                              <p><strong>Departure:</strong> <span th:text="${train.departureTime}"></span></p>
+                              <p><strong>Arrival:</strong> <span th:text="${train.arrivalTime}"></span></p>
+                              <p><strong>Journey Date:</strong> <span th:text="${train.journeyDate}"></span></p>
+                              <p><strong>Travel Time:</strong> <span th:text="${train.travelTime}"></span></p>
+                              <p><strong>Seats Available:</strong> <span th:text="${train.availableSeats}"></span></p>
+                              <div class="modal-footer">
+                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                 <button type="submit" class="btn btn-primary">Confirm Booking</button>
+                              </div>
+                           </form>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+            <!-- End of train card -->
+         </div>
+         <!-- End of row -->
+      </div>
+      <!-- End of container -->
+   </body>
 </html>
