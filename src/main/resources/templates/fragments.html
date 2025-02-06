@@ -6,7 +6,7 @@
 
 </head>	
 <body>
-<nav th:fragment="navbar" class="navbar navbar-expand-lg navbar-dark bg-dark mb-0">
+    <nav th:fragment="navbar" class="navbar navbar-expand-lg navbar-dark bg-dark mb-0">
    <div class="container-fluid">
       <!-- Brand Logo (Left) -->
       <a class="navbar-brand" href="/bharattrains/home">Bharat Trains</a>
@@ -16,8 +16,8 @@
       <span class="navbar-toggler-icon"></span>
       </button>
       <!-- All Navigation Items (Right) -->
-      <div class="collapse navbar-collapse text-center justify-content-end" id="navbarNav">
-         <ul class="navbar-nav">
+      <div class="collapse navbar-collapse justify-content-end text-center mx-auto" id="navbarNav">
+         <ul class="navbar-nav ms-auto align-items-lg-center">
             <!-- Core Links -->
             <li class="nav-item">
                <a class="nav-link" href="/bharattrains/home">Home</a>
@@ -55,6 +55,10 @@
                </a>
                <ul class="dropdown-menu dropdown-menu-end">
                   <li><a class="dropdown-item" href="/bharattrains/user/profile">My Profile</a></li>
+                  <li>
+                     <hr class="dropdown-divider">
+                  </li>
+                  <li><a class="dropdown-item" href="/bharattrains/user/bookings">My Bookings</a></li>
                   <li>
                      <hr class="dropdown-divider">
                   </li>
