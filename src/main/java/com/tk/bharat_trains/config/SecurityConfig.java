@@ -36,9 +36,8 @@ public class SecurityConfig {
 
 	@Bean
 	public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-		return http.csrf().disable()
+		return http.csrf(csrf -> csrf.disable())
 //				.httpBasic().and()
-				.sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED))
 				
 				.authorizeHttpRequests(auth -> auth.requestMatchers("/api/train/search**").hasRole("USER")
 						.requestMatchers("/api/notify**").permitAll()
@@ -46,7 +45,8 @@ public class SecurityConfig {
 						.hasRole("ADMIN")
 //						.requestMatchers("/api/train/search**", "/api/train/booking/**").hasRole("USER")
 						.requestMatchers("/api/auth/**", "/bharattrains/auth/**").permitAll().anyRequest().authenticated())
-				.formLogin().loginPage("/bharattrains/auth/login").successHandler(successHandler).permitAll().and()
+				.sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED))
+				.formLogin(login -> login.loginPage("/bharattrains/auth/login").successHandler(successHandler).permitAll())
 				.logout(logout -> logout.logoutUrl("/bharattrains/auth/logout").invalidateHttpSession(true).clearAuthentication(true)
 						.deleteCookies("JSESSIONID").logoutSuccessUrl("/bharattrains/auth/login?logout"))
 				.build();
