@@ -21,70 +21,57 @@
 					<div class=" text-white text-center"></div>
 					<div class="card-body">
 						<form action="/bharattrains/auth/register" method="POST">
-							<div class="row">
-								<!-- Username -->
-								<div class="col-md-6 mb-3">
-									<label for="username" class="form-label">Username</label> <input
-										type="text" id="username" name="username" class="form-control"
-										placeholder="Username" required>
-								</div>
-								<!-- Email -->
-								<div class="col-md-6 mb-3">
-									<label for="email" class="form-label">Email</label> <input
-										type="email" id="email" name="email" class="form-control"
-										placeholder="Email" required>
-								</div>
-							</div>
-							<div class="row">
-								<!-- Password -->
-								<div class="col-md-6 mb-3">
-									<label for="password" class="form-label">Password</label> <input
-										type="password" id="password" name="password"
-										class="form-control" placeholder="Password" required>
-								</div>
-								<!-- Phone Number -->
-								<div class="col-md-6 mb-3">
-									<label for="phoneno" class="form-label">Phone Number</label> <input
-										type="tel" id="phoneno" name="phoneno" class="form-control"
-										placeholder="Phone" required>
-								</div>
-							</div>
-							<div class="row">
-								<!-- Gender -->
-								<div class="col-md-6 mb-3">
-									<label class="form-label">Gender</label>
-									<div class="form-check">
-										<input class="form-check-input" type="radio" id="male"
-											name="gender" value="Male" required> <label
-											class="form-check-label" for="male">Male</label>
-									</div>
-									<div class="form-check">
-										<input class="form-check-input" type="radio" id="female"
-											name="gender" value="Female"> <label
-											class="form-check-label" for="female">Female</label>
-									</div>
-								</div>
-								<!-- Address -->
-								<div class="col-md-6 mb-3">
-									<label for="address" class="form-label">Address</label>
-									<textarea id="address" name="address" class="form-control"
-										rows="2" placeholder="Address" required></textarea>
-								</div>
-							</div>
-							<div class="col-md-6 mb-3">
-								<label for="role" class="form-label">Role</label> <select
-									id="role" name="role" class="form-select" required>
-									<option value="" disabled selected>Select Role</option>
-									<option value="USER">User</option>
-									<option value="ADMIN">Admin</option>
-								</select>
-							</div>
-							<!-- Submit Button -->
-							<div class="d-grid mx-5">
+			               <div class="row g-3">
+			                  <div class="col-md-6">
+			                     <label class="form-label">Username</label>
+			                     <input type="text" class="form-control" name="username" required placeholder="Enter Username">
+			                  </div>
+			                  <div class="col-md-6">
+			                     <label class="form-label">Email</label>
+			                     <input type="email" class="form-control" name="email" required placeholder="Enter Email">
+			                  </div>
+			                  <div class="col-md-6">
+			                     <label class="form-label">Password</label>
+			                     <input type="password" class="form-control" name="password" required placeholder="Enter Password">
+			                  </div>
+			                  <div class="col-md-6">
+			                     <label class="form-label">Phone Number</label>
+			                     <input type="tel" class="form-control" name="phoneno" required placeholder="Enter Phone No.">
+			                  </div>
+			                  <div class="col-md-6">
+			                     <label class="form-label">Address</label>
+			                     <textarea class="form-control" name="address" rows="2" required placeholder="Enter Address"></textarea>
+			                  </div>
+			                  <div class="col-md-6">
+			                     <label class="form-label">Role</label>
+			                     <select class="form-select" name="role" required>
+			                        <option value="USER">User</option>
+			                        <option value="ADMIN">Admin</option>
+			                     </select>
+			                  </div>
+			                  <div class="col-md-12">
+			                     <label class="form-label">Gender</label>
+			                     <div class="d-flex gap-3">
+			                        <div class="form-check">
+			                           <input class="form-check-input" type="radio" name="gender" id="male" value="male" required>
+			                           <label class="form-check-label" for="male">Male</label>
+			                        </div>
+			                        <div class="form-check">
+			                           <input class="form-check-input" type="radio" name="gender" id="female" value="female">
+			                           <label class="form-check-label" for="female">Female</label>
+			                        </div>
+			                        <div class="form-check">
+			                           <input class="form-check-input" type="radio" name="gender" id="other" value="other">
+			                           <label class="form-check-label" for="other">Other</label>
+			                        </div>
+			                     </div>
+			                  </div>
+			               </div>
+			               <div class="d-grid mt-3">
 								<button type="submit" id="liveToastBtn"
 									class="btn btn-primary btn-md mx-2">Register</button>
 							</div>
-						</form>
+               			</form>
 					</div>
 					<div class="card-footer text-center">
 						<small>Already have an account? <a

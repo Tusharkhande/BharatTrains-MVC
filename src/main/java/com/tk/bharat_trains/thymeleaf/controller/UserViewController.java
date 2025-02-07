@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -36,7 +37,7 @@ public class UserViewController {
 
 	@Autowired
 	UserService service;
-
+	
     @GetMapping("/profile")
     public String userProfile(Model model, Principal principal) {
         String name = principal.getName();
@@ -89,7 +90,7 @@ public class UserViewController {
 
       return "redirect:/bharattrains/user/profile";
     }
-    
+
 
 //    @GetMapping("/{userId}")
 //    public String getUser(@PathVariable int userId, Model model) {

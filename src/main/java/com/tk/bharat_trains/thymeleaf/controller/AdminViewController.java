@@ -4,12 +4,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.tk.bharat_trains.model.Users;
 import com.tk.bharat_trains.service.BookingService;
 import com.tk.bharat_trains.service.SearchService;
 import com.tk.bharat_trains.service.SeatService;
@@ -53,6 +55,13 @@ public class AdminViewController {
 		model.addAttribute("users", userService.getUsers());
 		return "admin/manage-users";
 	}
+    
+    @PostMapping("/addUser")
+    public String addUser(@ModelAttribute Users user, RedirectAttributes redirectAttrs) {
+      userService.saveUser(user);
+      redirectAttrs.addFlashAttribute("success", "User added successfully!");
+      return "redirect:/bharattrains/admin/users";
+    }
 	
 	@PostMapping("/deleteUser")	
 	public String deleteUser(@RequestParam("userId") int userId, RedirectAttributes redirectAttributes) {

@@ -1,0 +1,23 @@
+
+
+.avatar-initial {
+	width: 35px;
+	height: 35px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	font-weight: 500;
+}
+
+.table-hover tbody tr:hover {
+	background-color: #f8f9fa;
+}
+
+.card {
+	border-radius: 12px;
+	overflow: hidden;
+}
+
+.modal-content {
+	border-radius: 12px;
+}
