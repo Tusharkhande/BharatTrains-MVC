@@ -1,40 +1,40 @@
-body {
-     font-family: 'Poppins', sans-serif;
-     background: #f4f4f9;
+.stat-card {
+	border: none;
+	border-radius: 15px;
+	transition: transform 0.3s ease;
 }
-/* Main Content */
- .main-content {
-     padding: 20px;
+
+.stat-card:hover {
+	transform: translateY(-5px);
 }
-/* Dashboard Cards */
- .card {
-     padding: 20px;
-     border-radius: 10px;
-     box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
-     background: white;
-     text-align: center;
-     transition: 0.3s;
+
+.dashboard-link {
+	border: none;
+	border-radius: 15px;
+	transition: all 0.3s ease;
+	text-decoration: none;
+	color: #333;
+	background-color: #f8f9fa;
 }
- .card:hover {
-     transform: translateY(-5px);
+
+.dashboard-link:hover {
+	background-color: #e9ecef;
+	transform: translateY(-3px);
 }
- .card i {
-     font-size: 30px;
-     margin-bottom: 10px;
-     color: #1e88e5;
+
+.recent-bookings {
+	border-radius: 15px;
+	border: 1px solid #e9ecef;
 }
-/* Links as Cards */
- .dashboard-link {
-     text-decoration: none;
-     color: inherit;
+
+.booking-item {
+	transition: background-color 0.2s ease;
+	border-radius: 8px;
+	margin-bottom: 8px;
 }
- .dashboard-link:hover {
-     color: inherit;
-}
-/* Recent Bookings */
- .list-group-item {
-     font-size: 16px;
-}
- .badge {
-     font-size: 14px;
+
+.badge {
+	padding: 0.5em 0.75em;
+	border-radius: 10px;
+	font-weight: 500;
 }

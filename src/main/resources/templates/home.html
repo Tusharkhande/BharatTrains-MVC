@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org"
-	th:replace="base::layout(~{::section}, '/css/home.css')">
+	th:replace="base::layout(~{::section}, '/css/home.css')"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -13,17 +14,16 @@
 	<section th:with="pageName='home'" class="my-0">
 		<!-- Hero Section -->
 
-		<div class="hero-section text-center">
-			<div class="container">
-				<h1>Your Journey Starts Here</h1>
-
-				<p class="lead">Book train tickets effortlessly and enjoy a
-					seamless travel experience with Bharat Trains.</p>
-
-				<a href="#" class="btn btn-primary">Book Now</a>
-			</div>
-		</div>
-
+<div class="hero-section text-center rounded mt-3">
+   <div class="container">
+      <div class="hero-content">
+         <h1>Your Journey Starts Here</h1>
+         <p class="lead">Book train tickets effortlessly and enjoy a seamless travel experience with Bharat Trains.</p>
+         <a  sec:authorize="isAuthenticated()" href="/bharattrains/search" class="btn btn-primary btn-lg">Book Now</a>
+         <a sec:authorize="isAnonymous()" href="/bharattrains/auth/login" class="btn btn-primary btn-lg">Book Now</a>
+      </div>
+   </div>
+</div>
 		<!-- Features Section -->
 
 		<div class="container my-5">

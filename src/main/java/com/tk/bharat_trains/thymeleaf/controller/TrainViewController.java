@@ -37,11 +37,6 @@ public class TrainViewController {
 	@Autowired
 	SearchService searchService;
 
-//	@GetMapping()
-//	public String showTrains() {
-//		return "trains";
-//	}
-
 	@GetMapping("/admin/trains")
 	public String getAllTrainsWithPaths(Model model) {
 		List<Train> trains = trainService.getAllTrains();
@@ -52,7 +47,7 @@ public class TrainViewController {
 		model.addAttribute("trains", trains);
 		model.addAttribute("trainPaths", trainPaths);
 
-		return "all-trains";
+		return "/admin/manage-trains";
 	}
 
 	@GetMapping("/admin/addTrain")

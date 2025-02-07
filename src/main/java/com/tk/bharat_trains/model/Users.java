@@ -12,7 +12,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import com.tk.bharat_trains.repository.enums.Role;
+import com.tk.bharat_trains.enums.Role;
 
 @Entity
 @Table(name = "users")

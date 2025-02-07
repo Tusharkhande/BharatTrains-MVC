@@ -1,157 +1,52 @@
-body {
 
-            background: linear-gradient(to right, #e3f2fd, #ffffff);
-
-            font-family: 'Poppins', sans-serif;
-
-            font-size: 14px;
-
-        }
-
-
-
-        /* Card Styling */
-
-        .card {
-
-            border-radius: 10px;
-
-            overflow: hidden;
-
-            background: rgba(255, 255, 255, 0.7);
-
-            backdrop-filter: blur(8px);
-
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-
-            transition: transform 0.2s ease, box-shadow 0.2s ease;
-
-        }
-
-
-
-        .card:hover {
-
-            transform: translateY(-5px);
-
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
-
-        }
-
-
-
-        .card-body {
-
-            padding: 15px;
-
-        }
-
-
-
-        /* Heading Animation */
-
-        .heading {
-
-            font-size: 1.8rem;
-
-            font-weight: 600;
-
-            text-transform: uppercase;
-
-            color: #1e88e5;
-
-            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
-
-            animation: fadeIn 0.8s ease-in-out;
-
-        }
-
-
-
-        @keyframes fadeIn {
-
-            0% { opacity: 0; transform: translateY(-10px); }
-
-            100% { opacity: 1; transform: translateY(0); }
-
-        }
-
-
-
-        /* Train Route Animation */
-
-        .train-route {
-
-            font-size: 14px;
-
-            color: #444;
-
-            font-weight: 500;
-
-            display: inline-block;
-
-            position: relative;
-
-            white-space: nowrap;
-
-            overflow: hidden;
-
-        }
-
-
-
-        .train-route:before {
-
-            content: "🚆 ";
-
-            display: inline-block;
-
-            animation: moveTrain 3s linear infinite;
-
-        }
-
-
-
-        @keyframes moveTrain {
-
-            0% { transform: translateX(-5px); }
-
-            50% { transform: translateX(5px); }
-
-            100% { transform: translateX(-5px); }
-
-        }
-
-
-
-        /* Button Styles */
-
-        .btn-modern {
-
-            background: linear-gradient(to right, #ff6f61, #ff4757);
-
-            color: white;
-
-            padding: 8px 15px;
-
-            border-radius: 30px;
-
-            font-weight: 500;
-
-            font-size: 13px;
-
-            border: none;
-
-            transition: all 0.2s ease-in-out;
-
-        }
-
-
-
-        .btn-modern:hover {
-
-            background: linear-gradient(to right, #ff4757, #ff6f61);
-
-            transform: scale(1.03);
-
-        }
+.card {
+	border-radius: 10px;
+	overflow: hidden;
+	background: rgba(255, 255, 255, 0.7);
+	backdrop-filter: blur(8px);
+	box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+	transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.card:hover {
+	transform: translateY(-5px);
+	box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+}
+
+.card-body {
+	padding: 15px;
+}
+
+/* Heading Animation */
+.heading {
+	font-size: 1.8rem;
+	font-weight: 600;
+	text-transform: uppercase;
+	color: #1e88e5;
+	text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
+	animation: fadeIn 0.8s ease-in-out;
+}
+
+
+.train-route:before {
+	content: "🚆 ";
+	display: inline-block;
+	animation: moveTrain 3s linear infinite;
+}
+
+/* Button Styles */
+.btn-modern {
+	background: linear-gradient(to right, #ff6f61, #ff4757);
+	color: white;
+	padding: 8px 15px;
+	border-radius: 30px;
+	font-weight: 500;
+	font-size: 13px;
+	border: none;
+	transition: all 0.2s ease-in-out;
+}
+
+.btn-modern:hover {
+	background: linear-gradient(to right, #ff4757, #ff6f61);
+	transform: scale(1.03);
+}

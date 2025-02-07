@@ -15,7 +15,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
-import com.tk.bharat_trains.repository.enums.Role;
+import com.tk.bharat_trains.enums.Role;
 
 @EnableWebSecurity
 @Configuration
@@ -44,7 +44,8 @@ public class SecurityConfig {
 						.requestMatchers("/api/train/booking/**").hasRole("USER").requestMatchers("/api/train/**")
 						.hasRole("ADMIN")
 //						.requestMatchers("/api/train/search**", "/api/train/booking/**").hasRole("USER")
-						.requestMatchers("/api/auth/**", "/bharattrains/auth/**").permitAll().anyRequest().authenticated())
+                        .requestMatchers("/css/**", "/js/**", "/images/**").permitAll()
+						.requestMatchers("/api/auth/**", "/bharattrains/auth/**", "/bharattrains/home", "/bharattrains/about", "/bharattrains/contact").permitAll().anyRequest().authenticated())
 				.sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED))
 				.formLogin(login -> login.loginPage("/bharattrains/auth/login").successHandler(successHandler).permitAll())
 				.logout(logout -> logout.logoutUrl("/bharattrains/auth/logout").invalidateHttpSession(true).clearAuthentication(true)
