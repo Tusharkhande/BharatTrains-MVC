@@ -15,6 +15,6 @@ public interface BookingRepository extends JpaRepository<Booking, Integer>{
 	
 	List<Booking> findByUserId(int userId);
 	
-	@Query(value = " SELECT * FROM (SELECT b.* FROM booking b ORDER BY b.booking_date DESC) WHERE ROWNUM <= 5", nativeQuery = true)
-	List<Booking> findRecentBookings();
+//	@Query(value = " SELECT * FROM (SELECT b.* FROM booking b ORDER BY b.booking_date DESC) WHERE ROWNUM <= 5", nativeQuery = true)
+//	List<Booking> findRecentBookings();
 }

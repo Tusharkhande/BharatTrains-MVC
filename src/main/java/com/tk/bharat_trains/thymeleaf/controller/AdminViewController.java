@@ -79,4 +79,10 @@ public class AdminViewController {
 		trainService.deleteTrain(trainId);
 		return "redirect:/bharattrains/admin/dashboard";
 	}
+	
+	@GetMapping("/bookings")
+	public String showBookings(Model model) {
+		model.addAttribute("bookings", bookingService.getAllBookings());
+		return "admin/manage-bookings";
+	}
 }

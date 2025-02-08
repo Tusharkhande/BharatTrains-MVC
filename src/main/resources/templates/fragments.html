@@ -29,11 +29,17 @@
                <a class="nav-link" href="/bharattrains/contact">Contact</a>
             </li>
             <li class="nav-item">
-               <a class="nav-link" href="/bharattrains/search">Search Trains</a>
+               <a class="nav-link" sec:authorize="isAuthenticated()" href="/bharattrains/search">Search Trains</a>
             </li>
             <!-- Admin Section -->
             <li class="nav-item" sec:authorize="hasRole('ADMIN')">
                <a class="nav-link" href="/bharattrains/admin/trains">Manage Trains</a>
+            </li>
+            <li class="nav-item" sec:authorize="hasRole('ADMIN')">
+               <a class="nav-link" href="/bharattrains/admin/users">Manage Users</a>
+            </li>
+            <li class="nav-item" sec:authorize="hasRole('ADMIN')">
+               <a class="nav-link" href="/bharattrains/admin/bookings">Manage Bookings</a>
             </li>
             <li class="nav-item" sec:authorize="hasRole('ADMIN')">
                <a class="nav-link" href="/bharattrains/admin/dashboard">Dashboard</a>

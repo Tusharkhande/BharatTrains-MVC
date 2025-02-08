@@ -5,6 +5,7 @@ import java.time.LocalDate;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -116,11 +117,11 @@ public class BookingService {
 	}
 	
 	public List<Booking> getRecent5Bookings() {
-		return bookingRepository.findRecentBookings();
+		return bookingRepository.findAll(Sort.by(Sort.Direction.DESC, "bookingDate")).subList(0, 5);
 	}
 
 	public List<Booking> getAllBookings() {
-		return bookingRepository.findAll();
+		return bookingRepository.findAll(Sort.by(Sort.Direction.DESC, "bookingDate"));
 	}
 	
 }

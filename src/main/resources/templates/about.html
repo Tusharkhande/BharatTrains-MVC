@@ -1,47 +1,119 @@
-<html xmlns:th="http://www.thymeleaf.org"
-	th:replace="~{base::layout(~{::div}, '')}">
-<head>
-<title>Search Results</title>
-<!-- Add Bootstrap CSS -->
-<link
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
-	rel="stylesheet">
-</head>
-<body>
-	<div class="container mt-5">
-		<div class="row">
-			<div class="col-md-12 text-center">
-				<h1>About Bharat Trains</h1>
-				<p class="lead">Your gateway to explore the best train services
-					across India.</p>
-			</div>
-		</div>
-		<div class="row mt-4">
-			<div class="col-md-6">
-				<h2>Our Mission</h2>
-				<p>At Bharat Trains, our mission is to provide a seamless and
-					enjoyable travel experience to our customers. We strive to offer
-					the best train services, ensuring comfort, safety, and convenience
-					on every journey.</p>
-			</div>
-			<div class="col-md-6">
-				<h2>Our Vision</h2>
-				<p>We envision a future where train travel is the preferred mode
-					of transportation in India, connecting cities and communities with
-					unparalleled service and efficiency. Our goal is to continually
-					innovate and improve to meet the evolving needs of our passengers.</p>
-			</div>
-		</div>
-		<div class="row mt-4">
-			<div class="col-md-12">
-				<h2>Our Team</h2>
-				<p>Our dedicated team of professionals is committed to providing
-					exceptional service and support. From our customer care
-					representatives to our operational staff, each team member plays a
-					crucial role in delivering the Bharat Trains experience.</p>
-			</div>
-		</div>
-	</div>
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{base::layout(~{::div}, '')}">
+   <head>
+      <title>About Bharat Trains</title>
+   </head>
+   <body>
+      <!-- Hero Section -->
+      <div class="position-relative text-center text-white bg-dark py-5" style="background: url('https://source.unsplash.com/1600x600/?train,railway') center/cover no-repeat;">
+         <div class="container">
+            <h1 class="fw-bold">About Bharat Trains</h1>
+            <p class="lead">Your gateway to explore the best train services across India.</p>
+         </div>
+      </div>
+      <div class="container mt-5">
+         <div class="row g-4">
+            <!-- Mission -->
+            <div class="col-md-6">
+               <div class="card shadow-sm border-0">
+                  <div class="card-body text-center">
+                     <i class="bi bi-rocket text-primary display-5"></i>
+                     <h2 class="mt-3">Our Mission</h2>
+                     <p>We aim to provide seamless, safe, and comfortable train travel experiences, ensuring efficiency and customer satisfaction.</p>
+                  </div>
+               </div>
+            </div>
+            <!-- Vision -->
+            <div class="col-md-6">
+               <div class="card shadow-sm border-0">
+                  <div class="card-body text-center">
+                     <i class="bi bi-eye text-danger display-5"></i>
+                     <h2 class="mt-3">Our Vision</h2>
+                     <p>To make train travel the most preferred mode of transportation in India through continuous innovation and top-tier services.</p>
+                  </div>
+               </div>
+            </div>
+         </div>
+         <!-- Features -->
+         <div class="row mt-5">
+            <div class="col-12 text-center">
+               <h2 class="fw-bold">What We Offer</h2>
+            </div>
+         </div>
+         <div class="row mt-4 g-4">
+            <div class="col-md-4">
+               <div class="card shadow-sm border-0 text-center p-3">
+                  <i class="bi bi-ticket-perforated-fill text-success display-5"></i>
+                  <h5 class="mt-3">Easy Ticket Booking</h5>
+                  <p>Seamless online booking with instant confirmation.</p>
+               </div>
+            </div>
+            <div class="col-md-4">
+               <div class="card shadow-sm border-0 text-center p-3">
+                  <i class="bi bi-shield-lock-fill text-warning display-5"></i>
+                  <h5 class="mt-3">Safe & Secure Travel</h5>
+                  <p>Ensuring passenger safety with advanced security measures.</p>
+               </div>
+            </div>
+            <div class="col-md-4">
+               <div class="card shadow-sm border-0 text-center p-3">
+                  <i class="bi bi-wifi text-info display-5"></i>
+                  <h5 class="mt-3">Onboard Services</h5>
+                  <p>Wi-Fi, catering, and real-time updates for a great journey.</p>
+               </div>
+            </div>
+         </div>
+         <!-- Team Section -->
+         <div class="row mt-5">
+            <div class="col-12 text-center">
+               <h2 class="fw-bold">Meet Our Team</h2>
+               <p>Our leadership and dedicated professionals ensuring a smooth experience.</p>
+            </div>
+         </div>
+         <div class="row mt-4 g-4">
+            <!-- CEO -->
+            <div class="col-md-4 text-center">
+               <div class="card border-0 shadow-sm">
+                  <img src="https://source.unsplash.com/200x200/?businessman" class="rounded-circle mx-auto mt-3" width="120" height="120" alt="CEO">
+                  <div class="card-body">
+                     <h5 class="fw-bold">Aditya Shelar</h5>
+                     <p class="text-muted">CEO & Founder</p>
+                     <p>Leading Bharat Trains towards an efficient future.</p>
+                  </div>
+               </div>
+            </div>
+            <!-- CTO -->
+            <div class="col-md-4 text-center">
+               <div class="card border-0 shadow-sm">
+                  <img src="/images/tk.jpg" class="rounded-circle mx-auto mt-3" width="120" height="120" alt="CTO">
+                  <div class="card-body">
+                     <h5 class="fw-bold">Tushar Khande</h5>
+                     <p class="text-muted">CTO</p>
+                     <p>Innovating tech solutions to enhance train travel.</p>
+                  </div>
+               </div>
+            </div>
+            <!-- COO -->
+            <div class="col-md-4 text-center">
+               <div class="card border-0 shadow-sm">
+                  <img src="https://source.unsplash.com/200x200/?woman,corporate" class="rounded-circle mx-auto mt-3" width="120" height="120" alt="COO">
+                  <div class="card-body">
+                     <h5 class="fw-bold">Ankit Goswami</h5>
+                     <p class="text-muted">COO</p>
+                     <p>Oversees daily operations ensuring seamless services.</p>
+                  </div>
+               </div>
+            </div>
 
-</body>
+         </div>
+         <!-- Call to Action -->
+         <div class="row mt-5">
+            <div class="col-12 text-center">
+               <h2 class="fw-bold">Join Our Journey</h2>
+               <p>Experience a new way to travel across India with Bharat Trains.</p>
+               <a href="/bharattrains/search" class="btn btn-primary btn-lg mt-2">Book Now</a>
+            </div>
+         </div>
+      </div>
+   </body>
 </html>

@@ -41,8 +41,8 @@ public class SecurityConfig {
 				
 				.authorizeHttpRequests(auth -> auth.requestMatchers("/api/train/search**").hasRole("USER")
 						.requestMatchers("/api/notify**").permitAll()
-						.requestMatchers("/api/train/booking/**").hasRole("USER").requestMatchers("/api/train/**")
-						.hasRole("ADMIN")
+						.requestMatchers("/api/train/booking/**", "/bharattrains/user**").hasRole("USER")
+						.requestMatchers("/api/train/**", "/bharattrains/admin**").hasRole("ADMIN")
 //						.requestMatchers("/api/train/search**", "/api/train/booking/**").hasRole("USER")
                         .requestMatchers("/css/**", "/js/**", "/images/**").permitAll()
 						.requestMatchers("/api/auth/**", "/bharattrains/auth/**", "/bharattrains/home", "/bharattrains/about", "/bharattrains/contact").permitAll().anyRequest().authenticated())

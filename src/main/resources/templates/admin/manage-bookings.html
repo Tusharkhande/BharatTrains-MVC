@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{base::layout(~{::div}, '')}">
+   <head>
+      <title>Manage Bookings</title>
+   </head>
+   <body>
+      <div class="container-fluid px-4">
+         <!-- Header Section -->
+         <div class="d-flex justify-content-between align-items-center mb-4">
+	<p class="text-center h1 fw-bold mb-2 mt-1" style="color: #14103a;">Manage Bookings</p>
+         </div>
+         <!-- Success Alert -->
+         <div th:if="${success}" class="alert alert-success alert-dismissible fade show shadow-sm" role="alert">
+            <span th:text="${success}"></span>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+         </div>
+         <!-- Bookings Table -->
+         <div class="card border-0 shadow-sm">
+            <div class="card-body p-0">
+               <div class="table-responsive">
+                  <table class="table table-hover align-middle">
+                     <thead class="bg-light">
+                        <tr>
+                           <th class="ps-4">Booking ID</th>
+                           <th>Train Name</th>
+                           <th>Source</th>
+                           <th>Destination</th>
+                           <th>Journey Date</th>
+                           <th>Booking Date</th>
+                           <th>Status</th>
+                           <th class="text-end pe-4">Actions</th>
+                        </tr>
+                     </thead>
+                     <tbody>
+                        <tr th:each="booking : ${bookings}">
+                           <td class="ps-4 fw-medium" th:text="${booking.bookingId}"></td>
+                           <td th:text="${booking.trainName}"></td>
+                           <td th:text="${booking.source}"></td>
+                           <td th:text="${booking.destination}"></td>
+                           <td th:text="${booking.journeyDate}"></td>
+                           <td th:text="${booking.bookingDate}"></td>
+                           <td>
+                              <span class="badge rounded-pill"
+                                 th:classappend="${booking.bookingStatus == 'CONFIRMED' ? 'bg-success' :
+                                 (booking.bookingStatus == 'PENDING' ? 'bg-warning' : 'bg-danger')}">
+                              <span th:text="${booking.bookingStatus}"></span>
+                              </span>
+                           </td>
+                           <td class="text-end pe-4">
+                              <!-- Edit Button -->
+                              <button class="btn btn-sm btn-primary me-2" data-bs-toggle="modal"
+                                 th:attr="data-bs-target='#editBookingModal' + ${booking.bookingId}">
+                              <i class="fas fa-edit"></i>
+                              </button>
+                              <!-- Delete Button -->
+                              <button class="btn btn-sm btn-danger" data-bs-toggle="modal"
+                                 th:attr="data-bs-target='#deleteBookingModal' + ${booking.bookingId}">
+                              <i class="fas fa-trash"></i>
+                              </button>
+                           </td>
+                        </tr>
+                     </tbody>
+                  </table>
+               </div>
+            </div>
+         </div>
+         <!-- Edit Booking Modal -->
+         <div th:each="booking : ${bookings}" class="modal fade" th:id="'editBookingModal' + ${booking.bookingId}">
+            <div class="modal-dialog modal-dialog-centered">
+               <div class="modal-content">
+                  <div class="modal-header">
+                     <h5 class="modal-title">Edit Booking Status</h5>
+                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  </div>
+                  <div class="modal-body">
+                     <form th:action="@{/bharattrains/admin/updateBooking}" method="post">
+                        <input type="hidden" name="bookingId" th:value="${booking.bookingId}">
+                        <div class="mb-3">
+                           <label class="form-label">Booking Status</label>
+                           <select class="form-select" name="bookingStatus" required>
+                              <option value="CONFIRMED" th:selected="${booking.bookingStatus == 'CONFIRMED'}">Confirmed</option>
+                              <option value="PENDING" th:selected="${booking.bookingStatus == 'PENDING'}">Pending</option>
+                              <option value="CANCELLED" th:selected="${booking.bookingStatus == 'CANCELLED'}">Cancelled</option>
+                           </select>
+                        </div>
+                        <div class="modal-footer">
+                           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                           <button type="submit" class="btn btn-primary">Save Changes</button>
+                        </div>
+                     </form>
+                  </div>
+               </div>
+            </div>
+         </div>
+         <!-- Delete Booking Modal -->
+         <div th:each="booking : ${bookings}" class="modal fade" th:id="'deleteBookingModal' + ${booking.bookingId}">
+            <div class="modal-dialog modal-dialog-centered">
+               <div class="modal-content">
+                  <div class="modal-header bg-danger text-white">
+                     <h5 class="modal-title">Confirm Delete</h5>
+                     <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                  </div>
+                  <div class="modal-body">
+                     <p>Are you sure you want to delete booking <strong th:text="'#' + ${booking.bookingId}"></strong>?</p>
+                  </div>
+                  <div class="modal-footer">
+                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                     <form th:action="@{/bharattrains/admin/deleteBooking}" method="post">
+                        <input type="hidden" name="bookingId" th:value="${booking.bookingId}">
+                        <button type="submit" class="btn btn-danger">
+                        <i class="fas fa-trash"></i> Delete
+                        </button>
+                     </form>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+   </body>
+</html>
